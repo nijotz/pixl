@@ -11,7 +11,7 @@ class Visualization {
   public:
     Visualization(Input* input) : input(input) {};
     virtual void update()=0;
-    CHSV viz[];
+    CRGB viz[1];
     Input* input;
 };
 
@@ -19,8 +19,6 @@ class HueVisualization : public Visualization {
   public:
     HueVisualization(Input* input);
     void update();
-    CRGB viz[1];
-    Input* input;
 };
 
 } // end namespace pixelmap

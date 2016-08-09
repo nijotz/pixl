@@ -28,7 +28,9 @@ class Looper {
         num_input_(0),
         num_viz_(0),
         next_update_tick_(0),
-        next_draw_tick_(0)
+        next_draw_tick_(0),
+        draw_millis_per_tick_(0),
+        update_millis_per_tick_(0)
     {
       Log.Debug("Looper instantiated");
       //animations_ = {};

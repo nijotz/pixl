@@ -9,12 +9,12 @@ MarchAnimation::MarchAnimation(Visualization* viz, LEDs& leds)
     amplitude_(0.0) {}
 
 void MarchAnimation::init() {}
-void MarchAnimation::update() {
+void MarchAnimation::update() {}
+
+void MarchAnimation::draw(float interpolation) {
   for(int i = leds_.length() - 1; i > 0; i--) {
     leds_[i] = leds_[i - 1];
   }
 
   leds_[0] = viz_->viz[0];
 }
-
-void MarchAnimation::draw(float interpolation) { }

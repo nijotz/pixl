@@ -1,4 +1,5 @@
 #pragma once
+#include <Arduino.h>
 
 namespace pixelmap {
 
@@ -23,6 +24,13 @@ class FullInput : public Input {
     FullInput(){};
     void update() {};
     float getInput() { return 1.0; }
+};
+
+class WaveInput : public Input {
+  public:
+    WaveInput(){};
+    void update() {};
+    float getInput() { return (sin(2.0 * 3.14 * (millis() % 333) / 333.0) + 1.0) / 2.0; }
 };
 
 } // end namespace pixelmap

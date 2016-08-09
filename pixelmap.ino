@@ -2,11 +2,11 @@
 #include <FastLED.h>
 #include <Logging.h>
 
-#define LOGLEVEL LOG_LEVEL_DEBUG
+#define LOGLEVEL LOG_LEVEL_INFOS
 
 using namespace pixelmap;
 
-FullInput input = FullInput();
+WaveInput input = WaveInput();
 HueVisualization viz = HueVisualization(&input);
 LEDStrip strip = LEDStrip(128);
 LEDs leds = LEDs(strip, 0, 128);
