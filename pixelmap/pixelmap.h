@@ -1,5 +1,6 @@
 #pragma once
 #include "animation.h"
+#include "fire.h"
 #include "input.h"
 #include "leds.h"
 #include "looper.h"

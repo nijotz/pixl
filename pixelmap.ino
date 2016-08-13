@@ -6,11 +6,11 @@
 
 using namespace pixelmap;
 
-WaveInput input = WaveInput();
-HueVisualization viz = HueVisualization(&input);
+RandomInput input = RandomInput();
+FireVisualization viz = FireVisualization(&input, 128);
 LEDStrip strip = LEDStrip(128);
 LEDs leds = LEDs(strip, 0, 128);
-MarchAnimation march = MarchAnimation(&viz, leds);
+PassThroughAnimation passthru = PassThroughAnimation(&viz, leds);
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
@@ -19,7 +19,7 @@ void setup() {
   Looper* looper = Looper::instance();
   looper->addInput(&input);
   looper->addVisualization(&viz);
-  looper->addAnimation(&march);
+  looper->addAnimation(&passthru);
 
   FastLED.addLeds<NEOPIXEL, 6>(strip.leds, 128);
   FastLED.show();
