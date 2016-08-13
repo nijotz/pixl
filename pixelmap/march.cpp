@@ -4,9 +4,7 @@ using namespace pixelmap;
 
 MarchAnimation::MarchAnimation(Visualization* viz, LEDs& leds)
   : leds_(leds),
-    viz_(viz),
-    wave_(0),
-    amplitude_(0.0) {}
+    viz_(viz) {}
 
 void MarchAnimation::init() {}
 void MarchAnimation::update() {}

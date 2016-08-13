@@ -15,8 +15,6 @@ class MarchAnimation : public Animation {
   private:
     LEDs& leds_;
     Visualization* viz_;
-    float wave_;
-    float amplitude_;
 };
 
 } // end namespace pixelmap
