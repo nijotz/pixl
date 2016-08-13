@@ -33,4 +33,11 @@ class WaveInput : public Input {
     float getInput() { return (sin(2.0 * 3.14 * (millis() % 333) / 333.0) + 1.0) / 2.0; }
 };
 
+class RandomInput : public Input {
+  public:
+    RandomInput(){};
+    void update() {};
+    float getInput() { return (float) rand() / (float) RAND_MAX; }
+};
+
 } // end namespace pixelmap
