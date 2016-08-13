@@ -19,6 +19,13 @@ void Looper::addVisualization(Visualization* visualization) {
   visualizations_[num_viz_++] = visualization;
 }
 
+void Looper::clearAll() {
+  Log.Debug("Clearing animations, inputs, and visualizations");
+  num_anim_ = 0;
+  num_input_ = 0;
+  num_viz_ = 0;
+}
+
 void Looper::loop() {
   Log.Debug("Looping..");
 

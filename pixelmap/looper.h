@@ -20,6 +20,7 @@ class Looper {
     void addAnimation(Animation* animation);
     void addInput(Input* input);
     void addVisualization(Visualization* visualization);
+    void clearAll();
     void setUpdatesPerSecond(int updates);
 
   private:
