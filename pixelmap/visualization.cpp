@@ -5,7 +5,7 @@ using namespace pixelmap;
 namespace pixelmap {
 
 HueVisualization::HueVisualization(Input* input, int size)
-  : Visualization(input) {}
+  : Visualization(input, size) {}
 
 void HueVisualization::update() {
   float val = input->getInput();

@@ -15,6 +15,8 @@ class Visualization {
     {
       viz = new CRGB[size];
     };
+    ~Visualization() { delete[] viz; }
+
     virtual void update()=0;
     int getSize() { return size_; };
     CRGB* viz;

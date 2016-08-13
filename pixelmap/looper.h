@@ -33,9 +33,6 @@ class Looper {
         update_millis_per_tick_(0)
     {
       Log.Debug("Looper instantiated");
-      //animations_ = {};
-      //visualizations_ = {};
-      //inputs_ = {};
     }
     void update_();
     void draw_(float interpolation);

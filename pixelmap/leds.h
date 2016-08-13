@@ -7,6 +7,7 @@ namespace pixelmap {
 class LEDStrip {
   public:
     LEDStrip(int length);
+    ~LEDStrip();
     void AssignPin(int pin);
     int length;
     CRGB* leds;

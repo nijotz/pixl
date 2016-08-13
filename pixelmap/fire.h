@@ -8,6 +8,7 @@ namespace pixelmap {
 class FireVisualization : public Visualization {
   public:
     FireVisualization(Input* input, int size = 1);
+    ~FireVisualization();
     void update();
   private:
     byte* heat_;

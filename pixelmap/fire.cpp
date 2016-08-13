@@ -47,15 +47,19 @@ FireVisualization::FireVisualization(Input* input, int size)
     heat_ = new byte[size];
   }
 
+FireVisualization::~FireVisualization() {
+  delete[] heat_;
+}
+
 void FireVisualization::update() {
 
   // Step 1.  Cool down every cell a little
-  for(int i = 0; i < size_; i++) {
+  for (int i = 0; i < size_; i++) {
     heat_[i] = qsub8( heat_[i],  random8(0, ((COOLING * 10) / size_) + 2));
   }
 
   // Step 2.  Heat from each cell drifts 'up' and diffuses a little
-  for(int i = size_ - 1; i >= 2; i--) {
+  for (int i = size_ - 1; i >= 2; i--) {
     heat_[i] = (heat_[i - 1] + heat_[i - 2] + heat_[i - 2] ) / 3;
   }
 
