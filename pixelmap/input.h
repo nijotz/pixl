@@ -40,4 +40,26 @@ class RandomInput : public Input {
     float getInput() { return (float) rand() / (float) RAND_MAX; }
 };
 
+// This will return 1.0 only once per press by keeping track of when the button
+// is released
+class ButtonInput : public Input {
+  public:
+    ButtonInput(int pin) : pin_(pin), released_(true) {};
+    void update() {};
+    float getInput() {
+      if (digitalRead(pin_) == HIGH) {
+        if (released_ == true) {
+          released_ = false;
+          return 1.0;
+        }
+      } else if (released_ == false) {
+        released_ = true;
+      }
+      return 0.0;
+    }
+  private:
+    int pin_;
+    bool released_;
+};
+
 } // end namespace pixelmap
