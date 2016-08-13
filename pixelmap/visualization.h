@@ -31,4 +31,11 @@ class HueVisualization : public Visualization {
     void update();
 };
 
+class NullVisualization : public Visualization {
+  public:
+    NullVisualization(Input* input, int size = 1) :
+      Visualization(input, size) {}
+    void update() {};
+};
+
 } // end namespace pixelmap
