@@ -26,6 +26,15 @@ class FullInput : public Input {
     float getInput() { return 1.0; }
 };
 
+class ConstantInput : public Input {
+  public:
+    ConstantInput(float value) : value_(value) {};
+    void update() {};
+    float getInput() { return value_; }
+  private:
+    float value_;
+};
+
 class WaveInput : public Input {
   public:
     WaveInput(){};
