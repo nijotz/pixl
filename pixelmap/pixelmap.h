@@ -6,4 +6,5 @@
 #include "leds.h"
 #include "looper.h"
 #include "march.h"
+#include "ripple.h"
 #include "visualization.h"
