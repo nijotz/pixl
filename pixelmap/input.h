@@ -37,9 +37,11 @@ class ConstantInput : public Input {
 
 class WaveInput : public Input {
   public:
-    WaveInput(){};
+    WaveInput(float seconds) : millis_(seconds * 1000.0) {};
     void update() {};
-    float getInput() { return (sin(2.0 * 3.14 * (millis() % 333) / 333.0) + 1.0) / 2.0; }
+    float getInput() { return (sin(2.0 * 3.14 * (millis() % millis_) / (float)millis_) + 1.0) / 2.0; }
+  private:
+    int millis_;
 };
 
 class RandomInput : public Input {
