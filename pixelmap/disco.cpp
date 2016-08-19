@@ -5,7 +5,7 @@ using namespace pixelmap;
 
 void DiscoAnimation::draw(float interp) {
   // First, we black out all the LEDs
-  fill_solid(leds_.strip_.leds, leds_.length(), CRGB::Black);
+  leds_.fillSolid(CRGB::Black);
 
   // To achive the strobe effect, we actually only draw lit pixels
   // every Nth frame (e.g. every 4th frame).

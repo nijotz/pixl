@@ -16,13 +16,19 @@ class LEDStrip {
 /* LEDs represents a section of an LED strip. */
 class LEDs {
   public:
-    LEDs(LEDStrip& strip, int start, int length);
+    LEDs(LEDStrip* strip, int start, int length);
+    LEDs(int num_strips, LEDStrip* strips[], int* starts, int* lengths);
+    ~LEDs();
     CRGB& operator[](int index);
     int length() { return length_; }
-    LEDStrip& strip_;
+    void fillSolid(CRGB color);
   private:
-    int start_;
+    void init(int num_strips, LEDStrip* strips[], int* starts, int* lengths);
     int length_;
+    int num_strips_;
+    LEDStrip** strips_;
+    int* starts_;
+    int* lengths_;
 };
 
 } // end namespace pixelmap
