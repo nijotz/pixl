@@ -12,6 +12,22 @@ class Animation {
     virtual void draw(float interpolation)=0;
 };
 
+class ScaledAnimation : public Animation {
+  public:
+    ScaledAnimation(Visualization* viz, LEDs& leds);
+    void init();
+    void update();
+    void draw(float interpolation);
+    void upscale();
+    void downscale();
+
+  private:
+    LEDs& leds_;
+    Visualization* viz_;
+    float wave_;
+    float amplitude_;
+};
+
 class PassThroughAnimation : public Animation {
   public:
     PassThroughAnimation(Visualization* viz, LEDs& leds);
