@@ -9,39 +9,78 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_DEBUG
 
 using namespace pixelmap;
 
-Input* input = new WaveInput(2.0);
-LEDStrip strip = LEDStrip(150);
-LEDs leds = LEDs(&strip, 0, 150);
+Input* input = new WaveInput(1.5);
+LEDStrip strip = LEDStrip(600);
+LEDs leds1 = LEDs(&strip, 0, 150);
+LEDs leds2 = LEDs(&strip, 150, 150);
+LEDs leds3 = LEDs(&strip, 300, 150);
+LEDs leds4 = LEDs(&strip, 450, 150);
 
-Visualization* viz = new RippleVisualization(input, 151);
-CurtainAnimation* anim = new CurtainAnimation(viz, leds);
+Visualization* viz = new RippleVisualization(input, 150);
+CurtainAnimation* anim1 = new CurtainAnimation(viz, leds1);
+CurtainAnimation* anim2 = new CurtainAnimation(viz, leds2);
+CurtainAnimation* anim3 = new CurtainAnimation(viz, leds3);
+CurtainAnimation* anim4 = new CurtainAnimation(viz, leds4);
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
   Log.Info("Starting setup()");
   delay(100);
 
-  anim->init(
+  anim1->init(
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.3,   // width in ratio of visualiation
+     0.25,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.175, // x distance from visualization start in ratio of visualization
+     0.25,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
-  FastLED.addLeds<WS2811, 6, RGB>(strip.leds, 151);
+  anim2->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.25,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+     0.0,   // x distance from visualization start in ratio of visualization
+    -0.5,   // y "
+     0.0);  // z "
+
+  anim3->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.25,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+    -0.25,  // x distance from visualization start in ratio of visualization
+    -0.5,   // y "
+     0.0);  // z "
+
+  anim4->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.25,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+    -0.5,   // x distance from visualization start in ratio of visualization
+    -0.5,   // y "
+     0.0);  // z "
+
+  FastLED.addLeds<WS2811, 6, RGB>(strip.leds, 600);
   FastLED.show();
 
   Looper* looper = Looper::instance();
   looper->addInput(input);
   looper->addVisualization(viz);
-  looper->addAnimation(anim);
+  looper->addAnimation(anim1);
+  looper->addAnimation(anim2);
+  looper->addAnimation(anim3);
+  looper->addAnimation(anim4);
 
   Log.Info("Finished setup()");
   delay(100);
