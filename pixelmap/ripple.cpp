@@ -25,7 +25,6 @@ RippleVisualization::RippleVisualization(Input* input, int size)
 void RippleVisualization::update() {
   float value = input->getInput();
 
-  Log.Debug("value: %d", (int)(value * 255.0));
 
   float sum = 0.0;
   for (int i = 0; i < smoothing_length_; i++) {
