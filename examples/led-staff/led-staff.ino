@@ -55,6 +55,19 @@ void loop() {
     Log.Info("Button press detected");
     switch(currentAnimation) {
       case 0:
+        Log.Info("Switching to Twinkle animation");
+        looper->clearAll();
+        delete viz;
+        delete anim;
+        viz = new TwinkleVisualization(&input, STAFF_LEDS);
+        anim = new PassThroughAnimation(viz, leds);
+        looper->addInput(&input);
+        looper->addVisualization(viz);
+        looper->addAnimation(anim);
+        looper->setUpdatesPerSecond(50);
+        currentAnimation = 1;
+        break;
+      case 1:
         Log.Info("Switching to Disco animation");
         looper->clearAll();
         delete viz;
@@ -64,9 +77,9 @@ void loop() {
         looper->addInput(&input);
         looper->addVisualization(viz);
         looper->addAnimation(anim);
-        currentAnimation = 1;
+        currentAnimation = 2;
         break;
-      case 1:
+      case 2:
         Log.Info("Switching to Fire animation");
         looper->clearAll();
         delete viz;
