@@ -9,7 +9,7 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_DEBUG
+#define LOGLEVEL LOG_LEVEL_INFOS
 
 using namespace pixelmap;
 

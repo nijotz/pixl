@@ -33,7 +33,7 @@ class Looper {
         draw_millis_per_tick_(0),
         update_millis_per_tick_(0)
     {
-      Log.Debug("Looper instantiated");
+      Log.Info("Looper instantiated");
     }
     void update_();
     void draw_(float interpolation);
