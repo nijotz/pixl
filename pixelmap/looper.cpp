@@ -44,6 +44,10 @@ void Looper::loop() {
   FastLED.show();
 }
 
+void Looper::setUpdatesPerSecond(int updates) {
+  update_millis_per_tick_ = 1000.0 / updates;
+}
+
 void Looper::update_() {
   Log.Debug("Updating..");
 
