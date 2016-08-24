@@ -7,6 +7,8 @@
 
 #define LOGLEVEL LOG_LEVEL_INFOS
 
+#define BRIGHTNESS 150
+
 #define STAFF_LEDS 100
 #define RING_LEDS 12
 
@@ -40,6 +42,7 @@ void setup() {
 
   FastLED.addLeds<NEOPIXEL, STAFF_PIN>(staff.leds, STAFF_LEDS);
   FastLED.addLeds<NEOPIXEL, RING_PIN>(ring.leds, RING_LEDS);
+  FastLED.setBrightness(BRIGHTNESS);
   FastLED.show();
 
   Log.Debug("Finished setup()");
