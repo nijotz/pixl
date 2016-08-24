@@ -27,7 +27,7 @@ LEDs leds2 = LEDs(&strip, 150, 150);
 LEDs leds3 = LEDs(&strip, 300, 150);
 LEDs leds4 = LEDs(&strip, 450, 150);
 
-Visualization* viz = new RippleVisualization(input, 150);
+Visualization* viz = new RippleVisualization(input, 60);
 CurtainAnimation* anim1 = new CurtainAnimation(viz, leds1);
 CurtainAnimation* anim2 = new CurtainAnimation(viz, leds2);
 CurtainAnimation* anim3 = new CurtainAnimation(viz, leds3);
