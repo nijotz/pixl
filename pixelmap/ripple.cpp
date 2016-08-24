@@ -25,7 +25,6 @@ RippleVisualization::RippleVisualization(Input* input, int size)
 void RippleVisualization::update() {
   float value = input->getInput();
 
-
   float sum = 0.0;
   for (int i = 0; i < smoothing_length_; i++) {
     sum += smoothing_[i];
@@ -35,7 +34,7 @@ void RippleVisualization::update() {
 
   PushQueue(smoothing_, smoothing_length_, value);
 
-  int hue = (int)(value * 255.0);
+  int hue = 192 + (-value * 192);
   CRGB color = CHSV(hue, 255, 255);
   PushQueue(viz, size_, color);
 }
