@@ -6,7 +6,6 @@ namespace pixelmap {
 LEDStrip::LEDStrip(int length)
   : length(length)
 {
-
   // Initialze one array to hold LED data for all the strips
   leds = new CRGB[length];
 
@@ -19,23 +18,26 @@ LEDStrip::~LEDStrip() {
   delete[] leds;
 }
 
-LEDs::LEDs(LEDStrip* strip, int start, int length) {
+LEDs::LEDs(LEDStrip* strip, int start, int length, bool reverse) {
   LEDStrip* strips[] = {strip};
   int starts[] = {start};
   int lengths[] = {length};
-  init(1, strips, starts, lengths);
+  init(1, strips, starts, lengths, reverse);
 }
 
-LEDs::LEDs(int num_strips, LEDStrip* strips[], int* starts, int* lengths) {
-  init(num_strips, strips, starts, lengths);
+LEDs::LEDs(int num_strips, LEDStrip* strips[], int* starts, int* lengths,
+           bool reverse) {
+  init(num_strips, strips, starts, lengths, reverse);
 }
 
-void LEDs::init(int num_strips, LEDStrip* strips[], int* starts, int* lengths) {
+void LEDs::init(int num_strips, LEDStrip* strips[], int* starts, int* lengths,
+                bool reverse) {
   strips_ = new LEDStrip*[num_strips];
   starts_ = new int[num_strips];
   lengths_ = new int[num_strips];
   num_strips_ = num_strips;
   length_ = 0;
+  reverse_ = reverse;
 
   for (int i = 0; i < num_strips; i++) {
     LEDStrip* strip = strips[i];
@@ -60,9 +62,15 @@ LEDs::~LEDs() {
 
 CRGB& LEDs::operator[](int index) {
   assert(index >= 0 && index < length_);
+
   for (int i = 0; i < num_strips_; i++) {
     if (index < lengths_[i]) {
-      return strips_[i]->leds[starts_[i] + index];
+      if (reverse_) {
+        index = starts_[i] + lengths_[i] - 1 - index;
+      } else {
+        index = starts_[i] + index;
+      }
+      return strips_[i]->leds[index];
     }
 
     index -= lengths_[i];

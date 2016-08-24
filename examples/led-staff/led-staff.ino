@@ -23,7 +23,8 @@ LEDStrip ring = LEDStrip(RING_LEDS);
 LEDStrip* strips[] = {&staff, &ring};
 int starts[] = {0, 0};
 int lengths[] = {STAFF_LEDS, RING_LEDS};
-LEDs leds = LEDs(2, strips, starts, lengths);
+
+LEDs leds = LEDs(2, strips, starts, lengths, true);
 
 Visualization* viz;
 Animation* anim;
