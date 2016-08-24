@@ -13,7 +13,14 @@ extern "C"{
 
 using namespace pixelmap;
 
-Input* input = new WaveInput(1.5);
+Input* input = new MSGEQ7Input(
+  1,    // left pin
+  0,    // right pin
+  12,   // strobe pin
+  13,   // reset pin,
+  1000, // max amplitude
+  250   // min amplutide
+);
 LEDStrip strip = LEDStrip(600);
 LEDs leds1 = LEDs(&strip, 0, 150);
 LEDs leds2 = LEDs(&strip, 150, 150);
