@@ -14,23 +14,30 @@ Type PushQueue(Type* array, int length, Type value) {
   return rtrn;
 }
 
-RippleVisualization::RippleVisualization(Input* input, int size)
-  : Visualization(input, size)
-  {
-    for (int i = 0; i < smoothing_length_; i++) {
-      smoothing_[i] = 0.0;
-    }
+RippleVisualization::RippleVisualization(Input* input, int size, int smoothing)
+    : Visualization(input, size),
+      smoothing_length_(smoothing) {
+  for (int i = 0; i < smoothing_length_; i++) {
+    smoothing_[i] = 0.0;
   }
 
-void RippleVisualization::update() {
-  float value = input->getInput();
+  smoothing_ = new double[smoothing];
+}
 
-  float sum = 0.0;
+
+RippleVisualization::~RippleVisualization() {
+  delete[] smoothing_;
+}
+
+void RippleVisualization::update() {
+  double value = input->getInput();
+
+  double sum = 0.0;
   for (int i = 0; i < smoothing_length_; i++) {
     sum += smoothing_[i];
   }
   sum += value;
-  value = sum / (float)(smoothing_length_ + 1);
+  value = sum / (double)(smoothing_length_ + 1);
 
   PushQueue(smoothing_, smoothing_length_, value);
 
