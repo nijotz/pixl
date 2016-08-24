@@ -89,6 +89,7 @@ void loop() {
         looper->addInput(&input);
         looper->addVisualization(viz);
         looper->addAnimation(anim);
+        looper->setUpdatesPerSecond(35);
         currentAnimation = 0;
         break;
     }
