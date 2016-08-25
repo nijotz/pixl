@@ -17,11 +17,11 @@ Type PushQueue(Type* array, int length, Type value) {
 RippleVisualization::RippleVisualization(Input* input, int size, int smoothing)
     : Visualization(input, size),
       smoothing_length_(smoothing) {
+  smoothing_ = new double[smoothing_length_];
+
   for (int i = 0; i < smoothing_length_; i++) {
     smoothing_[i] = 0.0;
   }
-
-  smoothing_ = new double[smoothing];
 }
 
 
