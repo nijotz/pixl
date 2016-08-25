@@ -20,7 +20,7 @@ void CurtainAnimation::init(int height_px, int width_px,
                             double rotation_rad,
                             double x_r, double y_r, double z_r)
 {
-  Log.Info("Setting up Curtain animation");
+  Log.Info("Setting up Curtain animation\n");
 
   assert( (height_px * width_px) <= leds_.length() );
 

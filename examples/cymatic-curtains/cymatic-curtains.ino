@@ -35,7 +35,7 @@ CurtainAnimation* anim4 = new CurtainAnimation(viz, leds4);
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
-  Log.Info("Starting setup()");
+  Log.Info("Starting setup()\n");
   delay(100);
 
   anim1->init(
@@ -89,7 +89,7 @@ void setup() {
   looper->addAnimation(anim3);
   looper->addAnimation(anim4);
 
-  Log.Info("Finished setup()");
+  Log.Info("Finished setup()\n");
   delay(100);
 }
 
