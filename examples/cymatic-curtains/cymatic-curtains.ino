@@ -13,29 +13,43 @@ extern "C"{
 
 using namespace pixelmap;
 
-Input* input = new MSGEQ7Input(
-  1,    // left pin
-  0,    // right pin
-  12,   // strobe pin
-  13,   // reset pin,
-  1000, // max amplitude
-  250   // min amplutide
-);
+Input* input;
+
 LEDStrip strip = LEDStrip(600);
 LEDs leds1 = LEDs(&strip, 0, 150);
 LEDs leds2 = LEDs(&strip, 150, 150);
 LEDs leds3 = LEDs(&strip, 300, 150);
 LEDs leds4 = LEDs(&strip, 450, 150);
 
-Visualization* viz = new RippleVisualization(input, 60);
-CurtainAnimation* anim1 = new CurtainAnimation(viz, leds1);
-CurtainAnimation* anim2 = new CurtainAnimation(viz, leds2);
-CurtainAnimation* anim3 = new CurtainAnimation(viz, leds3);
-CurtainAnimation* anim4 = new CurtainAnimation(viz, leds4);
+Visualization* viz;
+CurtainAnimation* anim1;
+CurtainAnimation* anim2;
+CurtainAnimation* anim3;
+CurtainAnimation* anim4;
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
+  delay(1000);
   Log.Info("Starting setup()\n");
+  Serial.flush();
+  delay(1000);
+
+  //input = new NoteInput();
+  input = new MSGEQ7Input(
+    1,    // left pin
+    0,    // right pin
+    12,   // strobe pin
+    13,   // reset pin,
+    1000, // max amplitude
+    250   // min amplutide
+  );
+
+  viz = new RippleVisualization(input, 60);
+
+  anim1 = new CurtainAnimation(viz, leds1);
+  anim2 = new CurtainAnimation(viz, leds2);
+  anim3 = new CurtainAnimation(viz, leds3);
+  anim4 = new CurtainAnimation(viz, leds4);
   delay(100);
 
   anim1->init(
