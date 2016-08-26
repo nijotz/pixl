@@ -42,7 +42,9 @@ void RippleVisualization::update() {
   PushQueue(smoothing_, smoothing_length_, value);
 
   int hue = 192 + (-value * 192);
-  CRGB color = CHSV(hue, 255, 255);
+  int val = 255;
+  if (value < 0.001) { val = 0; }
+  CRGB color = CHSV(hue, 255, val);
   PushQueue(viz, size_, color);
 }
 
