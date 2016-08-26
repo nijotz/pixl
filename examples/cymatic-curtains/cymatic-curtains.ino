@@ -9,7 +9,7 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_DEBUG
 
 using namespace pixelmap;
 
@@ -34,15 +34,15 @@ void setup() {
   Serial.flush();
   delay(1000);
 
-  //input = new NoteInput();
-  input = new MSGEQ7Input(
-    1,    // left pin
-    0,    // right pin
-    12,   // strobe pin
-    13,   // reset pin,
-    1000, // max amplitude
-    250   // min amplutide
-  );
+  input = new NoteInput();
+  //input = new MSGEQ7Input(
+  //  1,    // left pin
+  //  0,    // right pin
+  //  12,   // strobe pin
+  //  13,   // reset pin,
+  //  1000, // max amplitude
+  //  250   // min amplutide
+  //);
 
   viz = new RippleVisualization(input, 60);
 

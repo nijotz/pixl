@@ -8,6 +8,7 @@
 #include "looper.h"
 #include "march.h"
 #include "msgeq7.h"
+#include "note.h"
 #include "ripple.h"
 #include "twinkle.h"
 #include "visualization.h"
