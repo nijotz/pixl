@@ -24,8 +24,6 @@ class ScaledAnimation : public Animation {
   private:
     LEDs& leds_;
     Visualization* viz_;
-    float wave_;
-    float amplitude_;
 };
 
 class PassThroughAnimation : public Animation {
@@ -38,8 +36,6 @@ class PassThroughAnimation : public Animation {
   private:
     LEDs& leds_;
     Visualization* viz_;
-    float wave_;
-    float amplitude_;
 };
 
 } // end namespace pixelmap
