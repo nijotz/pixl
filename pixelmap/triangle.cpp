@@ -35,6 +35,7 @@ void TriangleAnimation::init_outer(double scale) {
   double cos_30 = 0.866;
   double height = sin_60 * side;
 
+  Log.Debug("Initializing outer triangle\n");
   Log.Debug("Length: %d\n", length);
   Log.Debug("Side: %d\n", side);
   Log.Debug("Half Side: %d\n", half_side);
@@ -57,7 +58,7 @@ void TriangleAnimation::init_outer(double scale) {
   // For the bottom sides of the outer triangle
   for (int i = 0; i <= side; i++) {
     int left_side = i;
-    int right_side = length - i;
+    int right_side = length - 1 - i;
 
     double from_bottom = (double)i * cos_30;
     double from_viz_start = (2.0 * (double)height) + 5.0 - from_bottom;
@@ -81,6 +82,7 @@ void TriangleAnimation::init_inner(double scale) {
   double height = sin_60 * side;
   double square_height = pow(height, 2);
 
+  Log.Debug("Initializing inner triangle\n");
   Log.Debug("Length: %d\n", length);
   Log.Debug("Side: %d\n", side);
   Log.Debug("Half Side: %d\n", half_side);
@@ -91,7 +93,7 @@ void TriangleAnimation::init_inner(double scale) {
   for (int i = 0; i <= side; i++) {
     double side_mapping = (double)i / viz_scaled;
     mapping_[i] = side_mapping;
-    mapping_[length - i] = side_mapping;
+    mapping_[length - 1 - i] = side_mapping;
   }
 
   // For the bottom side of the inner triangle
