@@ -9,7 +9,7 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_DEBUG
 
 using namespace pixelmap;
 
@@ -22,8 +22,10 @@ TriangleAnimation* anim;
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
-  Log.Info("Starting setup()\n");
-  delay(100);
+  delay(1000);
+  Log.Debug("Starting setup()\n");
+  Serial.flush();
+  delay(1000);
 
   input = new MSGEQ7Input(
     1,    // left pin
