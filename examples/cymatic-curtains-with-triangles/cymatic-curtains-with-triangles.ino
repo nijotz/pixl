@@ -20,12 +20,14 @@ LEDStrip strip2 = LEDStrip(150);
 LEDStrip strip3 = LEDStrip(150);
 LEDStrip strip4 = LEDStrip(150);
 LEDStrip strip5 = LEDStrip(57);
+LEDStrip strip6 = LEDStrip(57);
 
 LEDs leds1 = LEDs(&strip1, 0, 150);
 LEDs leds2 = LEDs(&strip2, 0, 150);
 LEDs leds3 = LEDs(&strip3, 0, 150);
 LEDs leds4 = LEDs(&strip4, 0, 150);
 LEDs leds5 = LEDs(&strip5, 0, 57);
+LEDs leds6 = LEDs(&strip6, 0, 57);
 
 Visualization* viz;
 CurtainAnimation* anim1;
@@ -33,6 +35,7 @@ CurtainAnimation* anim2;
 CurtainAnimation* anim3;
 CurtainAnimation* anim4;
 TriangleAnimation* anim5;
+TriangleAnimation* anim6;
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
@@ -58,6 +61,7 @@ void setup() {
   anim3 = new CurtainAnimation(viz, leds3);
   anim4 = new CurtainAnimation(viz, leds4);
   anim5 = new TriangleAnimation(viz, leds5);
+  anim6 = new TriangleAnimation(viz, leds6);
 
   // Far right curtain
   anim1->init(
@@ -104,12 +108,14 @@ void setup() {
      0.0);  // z "
 
   anim5->init(1.0);
+  anim6->init(0.6, true);
 
   FastLED.addLeds<WS2811, 6, RGB>(strip1.leds, 150);
   FastLED.addLeds<WS2811, 7, RGB>(strip2.leds, 150);
   FastLED.addLeds<WS2811, 8, RGB>(strip3.leds, 150);
   FastLED.addLeds<WS2811, 9, RGB>(strip4.leds, 150);
   FastLED.addLeds<WS2811, 10, GRB>(strip5.leds, 57);
+  FastLED.addLeds<WS2811, 11, GRB>(strip6.leds, 57);
 
   Looper* looper = Looper::instance();
   looper->addInput(input);
@@ -119,6 +125,7 @@ void setup() {
   looper->addAnimation(anim3);
   looper->addAnimation(anim4);
   looper->addAnimation(anim5);
+  looper->addAnimation(anim6);
 
   Log.Info("Finished setup()\n");
   delay(100);
