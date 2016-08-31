@@ -1,4 +1,23 @@
-# Pixel Mapping Library for Addressable LEDs
-Ever try to map LED pixel animations across arrays of varying shapes? Want an easy way to create LED pixel grids, triangles, circles or more? This library is designed to make the process of mapping digital pixel animations to a variety of modular hardware LED pixel shapes easier than ever.
+# Intro
 
-Want to help us with the library? Send an email to audioluxdevices@gmail.com
+## LED Strips
+A physical strip of LEDs whose color array will be given to FastLED
+
+## LEDs
+A group of one or more LED strip segments that will be considered one long strip
+
+## Inputs
+Something that produces a decimal number between 0 and 1.  It can be audio
+data, a random number generator, a wave function, whatever.
+
+## Visualizations
+Right now, it is a one-dimensional arary of color.  In the future, this could
+be two-, or even three-dimensional.
+
+## Animations
+This takes a visualization and maps it to LEDs. For example, this could take a
+one-dimensional array of color from a visualization and map it to a grid of
+LEDs to produce a plane.
+
+## Looper
+Controls calling the update/draw functions of all the components.
