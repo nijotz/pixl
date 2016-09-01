@@ -4,8 +4,8 @@ using namespace pixelmap;
 
 namespace pixelmap {
 
-RippleVisualization::RippleVisualization(Input* input, int size, int smoothing)
-    : Visualization(input, size),
+OnOffVisualization::OnOffVisualization(Input* input, int smoothing)
+    : Visualization(input, 1),
       smoothing_length_(smoothing) {
   smoothing_ = new double[smoothing_length_];
 
@@ -14,12 +14,11 @@ RippleVisualization::RippleVisualization(Input* input, int size, int smoothing)
   }
 }
 
-
-RippleVisualization::~RippleVisualization() {
+OnOffVisualization::~OnOffVisualization() {
   delete[] smoothing_;
 }
 
-void RippleVisualization::update() {
+void OnOffVisualization::update() {
   double value = input->getInput();
 
   double sum = 0.0;
@@ -31,11 +30,9 @@ void RippleVisualization::update() {
 
   PushQueue(smoothing_, smoothing_length_, value);
 
-  int hue = 192 + (-value * 192);
-  int val = 255;
-  if (value < 0.001) { val = 0; }
-  CRGB color = CHSV(hue, 255, val);
-  PushQueue(viz, size_, color);
+  CRGB color = CRGB::Blue;
+  color.fadeToBlackBy(255 - (255 * value));
+  viz[0] = color;
 }
 
 } // end namespace pixelmap
