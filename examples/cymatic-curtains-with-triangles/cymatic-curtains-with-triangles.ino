@@ -15,25 +15,60 @@ using namespace pixelmap;
 
 Input* input;
 
+// Curtains
 LEDStrip strip1 = LEDStrip(150);
 LEDStrip strip2 = LEDStrip(150);
 LEDStrip strip3 = LEDStrip(150);
 LEDStrip strip4 = LEDStrip(150);
-LEDStrip strip5 = LEDStrip(57);
-LEDStrip strip6 = LEDStrip(57);
 
+// Triangles strips, groups of 3 triangles
+LEDStrip strip5 = LEDStrip(165);
+LEDStrip strip6 = LEDStrip(165);
+LEDStrip strip7 = LEDStrip(165);
+
+// Curtain LEDs
 LEDs leds1 = LEDs(&strip1, 0, 150);
 LEDs leds2 = LEDs(&strip2, 0, 150);
 LEDs leds3 = LEDs(&strip3, 0, 150);
 LEDs leds4 = LEDs(&strip4, 0, 150);
-LEDs leds5 = LEDs(&strip5, 0, 57);
-LEDs leds6 = LEDs(&strip6, 0, 57);
+
+// Inner triangles
+int inner_starts[] = {37, 0, 19};
+int inner_lengths[] = {18, 19, 18};
+
+LEDStrip* strips5[] = {&strip5, &strip5, &strip5};
+LEDStrip* strips6[] = {&strip6, &strip6, &strip6};
+LEDStrip* strips7[] = {&strip7, &strip7, &strip7};
+
+LEDs leds5 = LEDs(3, strips5, inner_starts, inner_lengths);
+LEDs leds6 = LEDs(3, strips6, inner_starts, inner_lengths);
+LEDs leds7 = LEDs(3, strips7, inner_starts, inner_lengths);
+
+LEDs* inner_leds[] = {&leds5, &leds6, &leds7};
+
+// Outer triangles
+int outer1_starts[] = {92, 55, 74};
+int outer1_lengths[] = {18, 19, 18};
+
+int outer2_starts[] = {147, 110, 129};
+int outer2_lengths[] = {18, 19, 18};
+
+LEDs leds8 = LEDs(3, strips5, outer1_starts, outer1_lengths);
+LEDs leds9 = LEDs(3, strips6, outer1_starts, outer1_lengths);
+LEDs leds10 = LEDs(3, strips7, outer1_starts, outer1_lengths);
+
+LEDs leds11 = LEDs(3, strips5, outer2_starts, outer2_lengths);
+LEDs leds12 = LEDs(3, strips6, outer2_starts, outer2_lengths);
+LEDs leds13 = LEDs(3, strips7, outer2_starts, outer2_lengths);
+
+LEDs* outer_leds[] = {&leds8, &leds9, &leds10, &leds11, &leds12, &leds13};
 
 Visualization* viz;
 CurtainAnimation* anim1;
 CurtainAnimation* anim2;
 CurtainAnimation* anim3;
 CurtainAnimation* anim4;
+
 TriangleAnimation* anim5;
 TriangleAnimation* anim6;
 
@@ -60,8 +95,9 @@ void setup() {
   anim2 = new CurtainAnimation(viz, leds2);
   anim3 = new CurtainAnimation(viz, leds3);
   anim4 = new CurtainAnimation(viz, leds4);
-  anim5 = new TriangleAnimation(viz, leds5);
-  anim6 = new TriangleAnimation(viz, leds6);
+
+  anim5 = new TriangleAnimation(viz, inner_leds, 3);
+  anim6 = new TriangleAnimation(viz, outer_leds, 6);
 
   // Far right curtain
   anim1->init(
@@ -110,12 +146,14 @@ void setup() {
   anim5->init(1.0);
   anim6->init(0.6, true);
 
-  FastLED.addLeds<WS2811, 6, RGB>(strip1.leds, 150);
-  FastLED.addLeds<WS2811, 7, RGB>(strip2.leds, 150);
-  FastLED.addLeds<WS2811, 8, RGB>(strip3.leds, 150);
-  FastLED.addLeds<WS2811, 9, RGB>(strip4.leds, 150);
-  FastLED.addLeds<WS2811, 10, GRB>(strip5.leds, 57);
-  FastLED.addLeds<WS2811, 11, GRB>(strip6.leds, 57);
+  FastLED.addLeds<WS2811,  8, RGB>(strip1.leds, 150);
+  FastLED.addLeds<WS2811,  9, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 10, RGB>(strip3.leds, 150);
+  FastLED.addLeds<WS2811, 11, RGB>(strip4.leds, 150);
+
+  FastLED.addLeds<WS2811,  4, GRB>(strip5.leds, 165);
+  FastLED.addLeds<WS2811,  6, GRB>(strip6.leds, 165);
+  FastLED.addLeds<WS2811,  7, GRB>(strip7.leds, 165);
 
   Looper* looper = Looper::instance();
   looper->addInput(input);

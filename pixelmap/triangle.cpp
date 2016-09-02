@@ -3,12 +3,13 @@
 
 using namespace pixelmap;
 
-TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs& leds)
+TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs** leds, int num_leds)
     : leds_(leds),
-      viz_(viz) {
-}
+      num_leds_(num_leds),
+      viz_(viz) {}
 
 TriangleAnimation::~TriangleAnimation() {
+  delete[] leds_;
   delete[] mapping_;
 }
 
@@ -26,8 +27,8 @@ void TriangleAnimation::init(double scale, bool outer) {
 }
 
 void TriangleAnimation::init_outer(double scale) {
-  double viz_scaled = viz_->getSize() * scale;
-  int length = leds_.length();
+  float viz_scaled = viz_->getSize() * scale;
+  int length = leds_[0]->length();
   int side = length / 3;
   int half_side = length / 6;
   double sin_60 = 0.866;
@@ -75,7 +76,7 @@ void TriangleAnimation::init_outer(double scale) {
 void TriangleAnimation::init_inner(double scale) {
 
   double viz_scaled = viz_->getSize() * scale;
-  int length = leds_.length();
+  int length = leds_[0]->length();
   int side = length / 3;
   int half_side = length / 6;
   double sin_60 = 0.866;
@@ -116,9 +117,12 @@ void TriangleAnimation::init_inner(double scale) {
 void TriangleAnimation::update() {}
 
 void TriangleAnimation::draw(float interpolation) {
-  for (int i = 0; i < leds_.length(); i++) {
-    double viz_index = mapping_[i] * (double)viz_->getSize();
-    leds_[i] = viz_->viz[(int)viz_index];
+  for (int i = 0; i < num_leds_; i++) {
+    LEDs* leds = leds_[i];
+    for (int j = 0; j < leds->length(); j++) {
+      float viz_index = mapping_[j] * (float)viz_->getSize();
+      (*leds)[j] = viz_->viz[(int)viz_index];
+    }
   }
 }
 

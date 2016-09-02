@@ -7,7 +7,7 @@ namespace pixelmap {
 
 class TriangleAnimation : public Animation {
   public:
-    TriangleAnimation(Visualization* viz, LEDs& leds);
+    TriangleAnimation(Visualization* viz, LEDs* leds[], int num_leds);
     ~TriangleAnimation();
     void init();
     void init(double scale, bool outer = false);
@@ -17,7 +17,8 @@ class TriangleAnimation : public Animation {
     void draw(float interpolation);
 
   private:
-    LEDs& leds_;
+    LEDs** leds_;
+    int num_leds_;
     Visualization* viz_;
     double* mapping_;
 };
