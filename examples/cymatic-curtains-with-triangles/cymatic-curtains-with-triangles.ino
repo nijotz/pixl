@@ -155,6 +155,8 @@ void setup() {
   FastLED.addLeds<WS2811,  6, GRB>(strip6.leds, 165);
   FastLED.addLeds<WS2811,  7, GRB>(strip7.leds, 165);
 
+  FastLED.setBrightness(255);
+
   Looper* looper = Looper::instance();
   looper->addInput(input);
   looper->addVisualization(viz);
