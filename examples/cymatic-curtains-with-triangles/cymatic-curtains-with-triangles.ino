@@ -149,10 +149,10 @@ void setup() {
   anim5->init(1.0);
   anim6->init(0.6, true);
 
-  FastLED.addLeds<WS2811,  8, RGB>(strip1.leds, 150);
-  FastLED.addLeds<WS2811,  9, RGB>(strip2.leds, 150);
-  FastLED.addLeds<WS2811, 10, RGB>(strip3.leds, 150);
-  FastLED.addLeds<WS2811, 11, RGB>(strip4.leds, 150);
+  FastLED.addLeds<WS2811,  8, RGB>(strip4.leds, 150);
+  FastLED.addLeds<WS2811,  9, RGB>(strip3.leds, 150);
+  FastLED.addLeds<WS2811, 10, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 11, RGB>(strip1.leds, 150);
 
   FastLED.addLeds<WS2811,  4, GRB>(strip5.leds, 165);
   FastLED.addLeds<WS2811,  6, GRB>(strip6.leds, 165);
