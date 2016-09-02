@@ -14,7 +14,7 @@ TriangleAnimation::~TriangleAnimation() {
 }
 
 void TriangleAnimation::init() {}
-void TriangleAnimation::init(double scale, bool outer) {
+void TriangleAnimation::init(float scale, bool outer) {
   Log.Info("Setting up Triangle animation\n");
 
   if (outer) {
@@ -26,31 +26,31 @@ void TriangleAnimation::init(double scale, bool outer) {
   Log.Info("Finished setting up Triangle animation\n");
 }
 
-void TriangleAnimation::init_outer(double scale) {
+void TriangleAnimation::init_outer(float scale) {
   float viz_scaled = viz_->getSize() * scale;
   int length = leds_[0]->length();
   int side = length / 3;
   int half_side = length / 6;
-  double sin_60 = 0.866;
-  double sin_30 = 0.5;
-  double cos_30 = 0.866;
-  double height = sin_60 * side;
+  float sin_60 = 0.866;
+  float sin_30 = 0.5;
+  float cos_30 = 0.866;
+  float height = sin_60 * side;
 
   Log.Debug("Initializing outer triangle\n");
   Log.Debug("Length: %d\n", length);
   Log.Debug("Side: %d\n", side);
   Log.Debug("Half Side: %d\n", half_side);
 
-  mapping_ = new double[length];
+  mapping_ = new float[length];
 
   // For the top side of the outer triangle
   for (int i = 0; i <= half_side; i++) {
     // Doesn't matter left vs right, they get the same values
     int left_side = side + i;
     int right_side = (2 * side) - i;
-    double a_squared = pow(height + 5, 2);
-    double b_squared = pow(half_side - i, 2);
-    double top_mapping =  sqrt(a_squared + b_squared) / viz_scaled;
+    float a_squared = pow(height + 5, 2);
+    float b_squared = pow(half_side - i, 2);
+    float top_mapping =  sqrt(a_squared + b_squared) / viz_scaled;
 
     mapping_[left_side] = top_mapping;
     mapping_[right_side] = top_mapping;
@@ -61,38 +61,38 @@ void TriangleAnimation::init_outer(double scale) {
     int left_side = i;
     int right_side = length - 1 - i;
 
-    double from_bottom = (double)i * cos_30;
-    double from_viz_start = (2.0 * (double)height) + 5.0 - from_bottom;
-    double from_midline = (double)i * sin_30;
-    double a_squared = pow(from_viz_start, 2);
-    double b_squared = pow(from_midline, 2);
-    double bottom_mapping = sqrt(a_squared + b_squared) / viz_scaled;
+    float from_bottom = (float)i * cos_30;
+    float from_viz_start = (2.0 * (float)height) + 5.0 - from_bottom;
+    float from_midline = (float)i * sin_30;
+    float a_squared = pow(from_viz_start, 2);
+    float b_squared = pow(from_midline, 2);
+    float bottom_mapping = sqrt(a_squared + b_squared) / viz_scaled;
 
     mapping_[left_side] = bottom_mapping;
     mapping_[right_side] = bottom_mapping;
   }
 }
 
-void TriangleAnimation::init_inner(double scale) {
+void TriangleAnimation::init_inner(float scale) {
 
-  double viz_scaled = viz_->getSize() * scale;
+  float viz_scaled = viz_->getSize() * scale;
   int length = leds_[0]->length();
   int side = length / 3;
   int half_side = length / 6;
-  double sin_60 = 0.866;
-  double height = sin_60 * side;
-  double square_height = pow(height, 2);
+  float sin_60 = 0.866;
+  float height = sin_60 * side;
+  float square_height = pow(height, 2);
 
   Log.Debug("Initializing inner triangle\n");
   Log.Debug("Length: %d\n", length);
   Log.Debug("Side: %d\n", side);
   Log.Debug("Half Side: %d\n", half_side);
 
-  mapping_ = new double[length];
+  mapping_ = new float[length];
 
   // For side coming from the center
   for (int i = 0; i <= side; i++) {
-    double side_mapping = (double)i / viz_scaled;
+    float side_mapping = (float)i / viz_scaled;
     mapping_[i] = side_mapping;
     mapping_[length - 1 - i] = side_mapping;
   }
@@ -107,7 +107,7 @@ void TriangleAnimation::init_inner(double scale) {
     // Doesn't matter left vs right, they get the same values
     int left_side = side + i;
     int right_side = 2 * side - i;
-    double bottom_mapping = sqrt(square_height + pow(half_side - i, 2)) / viz_scaled;
+    float bottom_mapping = sqrt(square_height + pow(half_side - i, 2)) / viz_scaled;
 
     mapping_[right_side] = bottom_mapping;
     mapping_[left_side] = bottom_mapping;

@@ -10,9 +10,9 @@ class TriangleAnimation : public Animation {
     TriangleAnimation(Visualization* viz, LEDs* leds[], int num_leds);
     ~TriangleAnimation();
     void init();
-    void init(double scale, bool outer = false);
-    void init_inner(double scale);
-    void init_outer(double scale);
+    void init(float scale, bool outer = false);
+    void init_inner(float scale);
+    void init_outer(float scale);
     void update();
     void draw(float interpolation);
 
@@ -20,7 +20,7 @@ class TriangleAnimation : public Animation {
     LEDs** leds_;
     int num_leds_;
     Visualization* viz_;
-    double* mapping_;
+    float* mapping_;
 };
 
 } // end namespace pixelmap
