@@ -51,6 +51,16 @@ class RandomInput : public Input {
     float getInput() { return (float) rand() / (float) RAND_MAX; }
 };
 
+class SwitchInput : public Input {
+  public:
+    SwitchInput(int pin) : pin_(pin) { pinMode(pin_, INPUT); };
+    void update() {};
+    float getInput() { return digitalRead(pin_) == HIGH; }
+  private:
+    int pin_;
+    bool released_;
+};
+
 // This will return 1.0 only once per press by keeping track of when the button
 // is released
 class ButtonInput : public Input {
