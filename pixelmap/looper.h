@@ -21,6 +21,7 @@ class Looper {
     void addInput(Input* input);
     void addVisualization(Visualization* visualization);
     void clearAll();
+    void clearVisualizations();
     void setUpdatesPerSecond(int updates);
 
   private:

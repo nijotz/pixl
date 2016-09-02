@@ -26,6 +26,11 @@ void Looper::clearAll() {
   num_viz_ = 0;
 }
 
+void Looper::clearVisualizations() {
+  Log.Info("Clearing visualizations\n");
+  num_viz_ = 0;
+}
+
 void Looper::loop() {
   Log.Debug("Looping..\n");
 
