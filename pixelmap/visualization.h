@@ -19,6 +19,9 @@ class Visualization {
 
     virtual void update()=0;
     int getSize() { return size_; };
+    CRGB getColorByRatio(float ratio);
+    CRGB getColorByIndex(float index);
+    CRGB getColorByIndex(int index);
     CRGB* viz;
     Input* input;
   protected:

@@ -70,6 +70,6 @@ void CurtainAnimation::update() {}
 
 void CurtainAnimation::draw(float interpolation) {
   for (int i = 0; i < leds_.length(); i++) {
-    leds_[i] = viz_->viz[(int)(mapping_[i] * viz_->getSize())];
+    leds_[i] = viz_->getColorByRatio(mapping_[i]);
   }
 }

@@ -120,8 +120,7 @@ void TriangleAnimation::draw(float interpolation) {
   for (int i = 0; i < num_leds_; i++) {
     LEDs* leds = leds_[i];
     for (int j = 0; j < leds->length(); j++) {
-      float viz_index = mapping_[j] * (float)viz_->getSize();
-      (*leds)[j] = viz_->viz[(int)viz_index];
+      (*leds)[j] = viz_->getColorByRatio(mapping_[j]);
     }
   }
 }
