@@ -2,6 +2,9 @@
 #include <FastLED.h>
 #include <Logging.h>
 
+// Uncomment to turn off assertions
+#define NDEBUG
+
 // Weird thing I had to do to get the Logging library working with teensy
 extern "C"{
   int _getpid(){ return -1;}
