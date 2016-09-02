@@ -53,8 +53,8 @@ LEDs* inner_leds[] = {&leds5, &leds6, &leds7};
 int outer1_starts[] = {92, 55, 74};
 int outer1_lengths[] = {18, 19, 18};
 
-int outer2_starts[] = {147, 110, 129};
-int outer2_lengths[] = {18, 19, 18};
+int outer2_starts[] = {129, 147, 110};
+int outer2_lengths[] = {18, 18, 19};
 
 LEDs leds8 = LEDs(3, strips5, outer1_starts, outer1_lengths);
 LEDs leds9 = LEDs(3, strips6, outer1_starts, outer1_lengths);
