@@ -90,12 +90,12 @@ void setup() {
     13,     // reset pin
     150,    // min amp
     1000,   // max amp
-    500.0,  // min freq (A0 Double Pedal A)
-    1750.0, // max freq (C8 Eighth octave)
+    750.0,  // min freq
+    2000.0, // max freq
     false   // enable freq mode
   );
 
-  viz = new RippleVisualization(input, 100, 1);
+  viz = new RippleVisualization(input, 75, 1);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
@@ -173,7 +173,7 @@ void setup() {
   looper->addAnimation(anim5);
   looper->addAnimation(anim6);
   looper->setFramesPerSecond(30);
-  looper->setUpdatesPerSecond(45);
+  looper->setUpdatesPerSecond(100);
 
   Log.Info("Finished setup()\n");
   delay(100);
