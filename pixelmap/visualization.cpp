@@ -8,13 +8,18 @@ namespace pixelmap {
 CRGB Visualization::getColorByRatio(float ratio) {
   assert(ratio >= 0);
   assert(ratio <= 1);
-  return viz[(int)((size_ - 1) * ratio)];
+  float viz_index = (float)(size_ - 1.0) * ratio;
+  return getColorByIndex(viz_index);
 }
 
 CRGB Visualization::getColorByIndex(float index) {
   assert(index >= 0);
   assert(index < size_);
-  return viz[(int)floor(index)];
+  CRGB color1 = viz[(int)floor(index)];
+  CRGB color2 = viz[(int)ceil(index)];
+  color1 /= 2;
+  color2 /= 2;
+  return color1 + color2;
 }
 
 CRGB Visualization::getColorByIndex(int index) {
