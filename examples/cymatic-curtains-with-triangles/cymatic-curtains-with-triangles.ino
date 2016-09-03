@@ -84,15 +84,18 @@ void setup() {
 
   //input = new WaveInput();
   input = new MSGEQ7Input(
-    1,    // left pin
-    0,    // right pin
-    12,   // strobe pin
-    13,   // reset pin,
-    1000, // max amplitude
-    250   // min amplutide
+    1,      // left pin
+    0,      // right pin
+    12,     // strobe pin
+    13,     // reset pin
+    150,    // min amp
+    1000,   // max amp
+    500.0,  // min freq (A0 Double Pedal A)
+    1750.0, // max freq (C8 Eighth octave)
+    false   // enable freq mode
   );
 
-  viz = new RippleVisualization(input, 70, 1);
+  viz = new RippleVisualization(input, 100, 1);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
