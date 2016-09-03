@@ -3,6 +3,15 @@
 
 using namespace pixelmap;
 
+TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs& leds)
+    : viz_(viz) {
+  leds_ = new LEDs*[1];
+  leds_[0] = &leds;
+  num_leds_ = 1;
+}
+
+// TODO: rather than passing multiple LEDs to this animation, it would be
+// nice to have an LED splitter class to pass to animations
 TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs** leds, int num_leds)
     : leds_(leds),
       num_leds_(num_leds),
