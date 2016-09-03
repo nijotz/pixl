@@ -10,6 +10,7 @@ class Input {
     Input(){};
     virtual void update()=0;
     virtual float getInput()=0;
+    virtual float getInput2()=0;
 };
 
 class NullInput : public Input {

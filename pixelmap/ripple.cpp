@@ -20,20 +20,12 @@ RippleVisualization::~RippleVisualization() {
 }
 
 void RippleVisualization::update() {
-  double value = input->getInput();
+  float amp = input->getInput();
+  float freq = input->getInput2();
 
-  double sum = 0.0;
-  for (int i = 0; i < smoothing_length_; i++) {
-    sum += smoothing_[i];
-  }
-  sum += value;
-  value = sum / (double)(smoothing_length_ + 1);
-
-  PushQueue(smoothing_, smoothing_length_, value);
-
-  int hue = 192 + (-value * 192);
-  int val = 255;
-  if (value < 0.001) { val = 0; }
+  int hue = 192 * freq;
+  int val = 255.0 * amp;
+  if (val < 10) { val = 0; }
   CRGB color = CHSV(hue, 255, val);
   PushQueue(viz, size_, color);
 }
