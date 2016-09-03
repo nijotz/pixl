@@ -92,7 +92,7 @@ void setup() {
     250   // min amplutide
   );
 
-  viz = new RippleVisualization(input, 75, 1);
+  viz = new RippleVisualization(input, 70, 1);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
@@ -109,8 +109,8 @@ void setup() {
      1.0,   // height in ratio of visualiation
      0.25,  // width in ratio of visualiation
      0.0,   // rotation in radians
-     0.45,  // x distance from visualization start in ratio of visualization
-    -0.7,   // y "
+     0.35,  // x distance from visualization start in ratio of visualization
+    -0.35,  // y "
      0.0);  // z "
 
   // Middle right curtain
@@ -120,8 +120,8 @@ void setup() {
      1.0,   // height in ratio of visualiation
      0.25,  // width in ratio of visualiation
      0.0,   // rotation in radians
-     0.13,   // x distance from visualization start in ratio of visualization
-    -0.5,   // y "
+     0.33,   // x distance from visualization start in ratio of visualization
+    -0.45,   // y "
      0.0);  // z "
 
   // Middle left curtain
@@ -131,8 +131,8 @@ void setup() {
      1.0,   // height in ratio of visualiation
      0.25,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.38,  // x distance from visualization start in ratio of visualization
-    -0.5,   // y "
+    -0.58,  // x distance from visualization start in ratio of visualization
+    -0.45,   // y "
      0.0);  // z "
 
   // Far left curtain
@@ -142,8 +142,8 @@ void setup() {
      1.0,   // height in ratio of visualiation
      0.25,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.7,   // x distance from visualization start in ratio of visualization
-    -0.7,   // y "
+    -0.8,   // x distance from visualization start in ratio of visualization
+    -0.35,  // y "
      0.0);  // z "
 
   anim5->init(1.0);
@@ -169,6 +169,8 @@ void setup() {
   looper->addAnimation(anim4);
   looper->addAnimation(anim5);
   looper->addAnimation(anim6);
+  looper->setFramesPerSecond(30);
+  looper->setUpdatesPerSecond(45);
 
   Log.Info("Finished setup()\n");
   delay(100);
