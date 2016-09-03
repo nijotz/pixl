@@ -53,6 +53,10 @@ void Looper::setUpdatesPerSecond(int updates) {
   update_millis_per_tick_ = 1000.0 / updates;
 }
 
+void Looper::setFramesPerSecond(int frames) {
+  draw_millis_per_tick_ = 1000.0 / frames;
+}
+
 void Looper::update_() {
   Log.Debug("Updating..\n");
 

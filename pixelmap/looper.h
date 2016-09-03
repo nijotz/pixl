@@ -23,6 +23,7 @@ class Looper {
     void clearAll();
     void clearVisualizations();
     void setUpdatesPerSecond(int updates);
+    void setFramesPerSecond(int frames);
 
   private:
     Looper()
