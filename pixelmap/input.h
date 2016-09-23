@@ -8,7 +8,7 @@ namespace pixelmap {
 class Input {
   public:
     Input(){};
-    void update() {};
+    virtual void update()=0;
     virtual float getInput()=0;
 };
 

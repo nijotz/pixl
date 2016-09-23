@@ -5,29 +5,29 @@ namespace pixelmap {
 Looper* Looper::looper_ = 0;
 
 void Looper::addAnimation(Animation* animation) {
-  Log.Debug("Adding animation");
+  Log.Info("Adding animation\n");
   animations_[num_anim_++] = animation;
 }
 
 void Looper::addInput(Input* input) {
-  Log.Debug("Adding input");
+  Log.Info("Adding input\n");
   inputs_[num_input_++] = input;
 }
 
 void Looper::addVisualization(Visualization* visualization) {
-  Log.Debug("Adding visualization");
+  Log.Info("Adding visualization\n");
   visualizations_[num_viz_++] = visualization;
 }
 
 void Looper::clearAll() {
-  Log.Debug("Clearing animations, inputs, and visualizations");
+  Log.Info("Clearing animations, inputs, and visualizations\n");
   num_anim_ = 0;
   num_input_ = 0;
   num_viz_ = 0;
 }
 
 void Looper::loop() {
-  Log.Debug("Looping..");
+  Log.Debug("Looping..\n");
 
   unsigned long current_time = millis();
 
@@ -44,8 +44,13 @@ void Looper::loop() {
   FastLED.show();
 }
 
+void Looper::setUpdatesPerSecond(int updates) {
+  update_millis_per_tick_ = 1000.0 / updates;
+}
+
 void Looper::update_() {
-  Log.Debug("Updating..");
+  Log.Debug("Updating..\n");
+
   for (int i = 0; i < num_anim_; i++) {
     animations_[i]->update();
   }
@@ -60,7 +65,8 @@ void Looper::update_() {
 }
 
 void Looper::draw_(float interp) {
-  Log.Debug("Drawing..");
+  Log.Debug("Drawing..\n");
+
   for (int i = 0; i < num_anim_; i++) {
     animations_[i]->draw(interp);
   }
