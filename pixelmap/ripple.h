@@ -16,7 +16,8 @@ class RippleVisualization : public Visualization {
     void update_freq();
     void update_amp();
     void pushRipples(float value);
-    double* smoothing_;
+    float* smoothing_amp_;
+    float* smoothing_freq_;
     int smoothing_length_;
     bool freq_;
 };

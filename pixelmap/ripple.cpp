@@ -8,29 +8,38 @@ RippleVisualization::RippleVisualization(Input* input, int size, int smoothing, 
     : Visualization(input, size),
       smoothing_length_(smoothing),
       freq_(freq) {
-  smoothing_ = new double[smoothing_length_];
+  smoothing_amp_ = new float[smoothing_length_];
+  smoothing_freq_ = new float[smoothing_length_];
 
   for (int i = 0; i < smoothing_length_; i++) {
-    smoothing_[i] = 0.0;
+    smoothing_amp_[i] = 0.0;
+    smoothing_freq_[i] = 0.0;
   }
 }
 
-
 RippleVisualization::~RippleVisualization() {
-  delete[] smoothing_;
+  delete[] smoothing_amp_;
+  delete[] smoothing_freq_;
+}
+
+template <typename Type>
+Type smooth(Type* smoothing, int length, Type value) {
+  Type sum = 0.0;
+  for (int i = 0; i < length; i++) {
+    sum += smoothing[i];
+  }
+  sum += value;
+  value = sum / (float)(length + 1);
+
+  PushQueue(smoothing, length, value);
+
+  return value;
 }
 
 void RippleVisualization::update_amp() {
-  double value = input->getInput();
+  float value = input->getInput();
 
-  double sum = 0.0;
-  for (int i = 0; i < smoothing_length_; i++) {
-    sum += smoothing_[i];
-  }
-  sum += value;
-  value = sum / (double)(smoothing_length_ + 1);
-
-  PushQueue(smoothing_, smoothing_length_, value);
+  value = smooth(smoothing_amp_, smoothing_length_, value);
 
   int hue = 192 + (-value * 192);
   int val = 255;
@@ -42,6 +51,9 @@ void RippleVisualization::update_amp() {
 void RippleVisualization::update_freq() {
   float amp = input->getInput(0);
   float freq = input->getInput(1);
+
+  amp = smooth(smoothing_amp_, smoothing_length_, amp);
+  freq = smooth(smoothing_freq_, smoothing_length_, freq);
 
   int hue = 192 * freq;
   int val = 255.0 * amp;
