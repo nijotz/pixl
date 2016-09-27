@@ -9,13 +9,16 @@ void PushStack(Type* array, int length, Type value);
 
 class RippleVisualization : public Visualization {
   public:
-    RippleVisualization(Input* input, int size = 1, int smoothing = 1);
+    RippleVisualization(Input* input, int size = 1, int smoothing = 1, bool freq = false);
     ~RippleVisualization();
     void update();
   private:
+    void update_freq();
+    void update_amp();
     void pushRipples(float value);
     double* smoothing_;
     int smoothing_length_;
+    bool freq_;
 };
 
 } // end namespace pixelmap

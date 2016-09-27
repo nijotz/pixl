@@ -4,9 +4,10 @@ using namespace pixelmap;
 
 namespace pixelmap {
 
-RippleVisualization::RippleVisualization(Input* input, int size, int smoothing)
+RippleVisualization::RippleVisualization(Input* input, int size, int smoothing, bool freq)
     : Visualization(input, size),
-      smoothing_length_(smoothing) {
+      smoothing_length_(smoothing),
+      freq_(freq) {
   smoothing_ = new double[smoothing_length_];
 
   for (int i = 0; i < smoothing_length_; i++) {
@@ -19,7 +20,7 @@ RippleVisualization::~RippleVisualization() {
   delete[] smoothing_;
 }
 
-void RippleVisualization::update() {
+void RippleVisualization::update_amp() {
   double value = input->getInput();
 
   double sum = 0.0;
@@ -36,6 +37,25 @@ void RippleVisualization::update() {
   if (value < 0.001) { val = 0; }
   CRGB color = CHSV(hue, 255, val);
   PushQueue(viz, size_, color);
+}
+
+void RippleVisualization::update_freq() {
+  float amp = input->getInput(0);
+  float freq = input->getInput(1);
+
+  int hue = 192 * freq;
+  int val = 255.0 * amp;
+  if (val < 10) { val = 0; }
+  CRGB color = CHSV(hue, 255, val);
+  PushQueue(viz, size_, color);
+}
+
+void RippleVisualization::update() {
+  if (freq_) {
+    update_freq();
+  } else {
+    update_amp();
+  }
 }
 
 } // end namespace pixelmap
