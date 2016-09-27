@@ -28,7 +28,7 @@ void ScaledAnimation::upscale() {
   int led_length = leds_.length();
   int viz_length = viz_->getSize();
 
-  // Subtract one from the lengths to get scalebecause of fencepost problem
+  // Subtract one from the lengths to get scale because of fencepost problem
   //
   // Example: If there are 5 LEDs and 3 viz colors, the first color will be
   // at 0, the last color at 4, and the other should be at 2.  0, 2, 4.
