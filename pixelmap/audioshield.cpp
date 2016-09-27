@@ -1,3 +1,5 @@
+#if defined(__MK20DX256__) || defined(__MK20DX128__)
+
 #include "audioshield.h"
 #include <Logging.h>
 #include <Audio.h>
@@ -38,3 +40,5 @@ float AudioShieldInput::getInput(int index) {
 }
 
 } // end namespace pixelmap
+
+#endif

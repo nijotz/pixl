@@ -1,6 +1,5 @@
 #pragma once
 #include "animation.h"
-#include "audioshield.h"
 #include "curtain.h"
 #include "disco.h"
 #include "fire.h"
@@ -15,3 +14,7 @@
 #include "twinkle.h"
 #include "util.h"
 #include "visualization.h"
+
+#if defined(__MK20DX256__) || defined(__MK20DX128__)
+#include "audioshield.h"
+#endif
