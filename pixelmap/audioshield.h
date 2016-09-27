@@ -10,12 +10,14 @@ namespace pixelmap {
 
 class AudioShieldInput : public Input {
   public:
-    AudioShieldInput(AudioAnalyzePeak* peak);
+    AudioShieldInput(AudioAnalyzePeak* peak, AudioAnalyzeNoteFrequency* note);
     void update();
-    float getInput();
+    float getInput(int index = 0);
   private:
     AudioAnalyzePeak* peak_;
-    float value_;
+    AudioAnalyzeNoteFrequency* note_;
+    float amp_;
+    float freq_;
 };
 
 } // end namespace pixelmap
