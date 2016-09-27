@@ -9,28 +9,28 @@ class Input {
   public:
     Input(){};
     virtual void update()=0;
-    virtual float getInput()=0;
+    virtual float getInput(int index = 0)=0;
 };
 
 class NullInput : public Input {
   public:
     NullInput(){};
     void update() {};
-    float getInput() { return 0.0; }
+    float getInput(int index = 0) { return 0.0; }
 };
 
 class FullInput : public Input {
   public:
     FullInput(){};
     void update() {};
-    float getInput() { return 1.0; }
+    float getInput(int index = 0) { return 1.0; }
 };
 
 class ConstantInput : public Input {
   public:
     ConstantInput(float value) : value_(value) {};
     void update() {};
-    float getInput() { return value_; }
+    float getInput(int index = 0) { return value_; }
   private:
     float value_;
 };
@@ -39,7 +39,11 @@ class WaveInput : public Input {
   public:
     WaveInput(float seconds = 1.0) : millis_(seconds * 1000.0) {};
     void update() {};
-    float getInput() { return (sin(2.0 * 3.14 * (millis() % millis_) / (float)millis_) + 1.0) / 2.0; }
+    float getInput(int index = 0) {
+      return
+        (sin(2.0 * 3.14 * (millis() % millis_) / (float)millis_) + 1.0)
+        / 2.0;
+    }
   private:
     int millis_;
 };
@@ -48,14 +52,14 @@ class RandomInput : public Input {
   public:
     RandomInput(){};
     void update() {};
-    float getInput() { return (float) rand() / (float) RAND_MAX; }
+    float getInput(int index = 0) { return (float) rand() / (float) RAND_MAX; }
 };
 
 class SwitchInput : public Input {
   public:
     SwitchInput(int pin) : pin_(pin) { pinMode(pin_, INPUT); };
     void update() {};
-    float getInput() { return digitalRead(pin_) == HIGH; }
+    float getInput(int index = 0) { return digitalRead(pin_) == HIGH; }
   private:
     int pin_;
     bool released_;
@@ -67,7 +71,7 @@ class ButtonInput : public Input {
   public:
     ButtonInput(int pin) : pin_(pin), released_(true) {};
     void update() {};
-    float getInput() {
+    float getInput(int index = 0) {
       if (digitalRead(pin_) == HIGH) {
         if (released_ == true) {
           released_ = false;
