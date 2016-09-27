@@ -23,8 +23,8 @@ using namespace pixelmap;
 #define GROUP TRIANGLE * 3
 #define STRIP GROUP * 3
 
-#define IN_START1 19
-#define IN_START2 37
+#define IN_START1 18
+#define IN_START2 36
 #define IN_START3 0
 #define IN_LENGTH1 18
 #define IN_LENGTH2 19
