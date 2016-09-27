@@ -127,9 +127,9 @@ TriangleAnimation* anim2;
 // Audio shield setup
 AudioInputI2S audio;
 AudioAnalyzePeak peak;
-AudioAnalyzeNoteFrequency freq;
+AudioAnalyzeNoteFrequency note;
 AudioConnection patchCord1(audio, peak);
-AudioConnection patchCord2(audio, freq);
+AudioConnection patchCord2(audio, note);
 AudioControlSGTL5000 audioShield;
 
 void setup() {
@@ -139,14 +139,15 @@ void setup() {
   Serial.flush();
   delay(1000);
 
-  AudioMemory(5);
+  AudioMemory(30);
   audioShield.enable();
   audioShield.inputSelect(AUDIO_INPUT_MIC);
   audioShield.micGain(50);
+  note.begin(.75);
 
-  input = new AudioShieldInput(&peak);
+  input = new AudioShieldInput(&peak, &note);
 
-  viz = new RippleVisualization(input, 150, 1);
+  viz = new RippleVisualization(input, 150, 1, true);
 
   anim1 = new TriangleAnimation(viz, inner_leds, 3);
   anim2 = new TriangleAnimation(viz, outer_leds, 6);
@@ -156,7 +157,7 @@ void setup() {
 
   FastLED.addLeds<WS2811, 6, GRB>(strip.leds, STRIP);
 
-  FastLED.setBrightness(32);
+  FastLED.setBrightness(255);
 
   Looper* looper = Looper::instance();
   looper->addInput(input);
