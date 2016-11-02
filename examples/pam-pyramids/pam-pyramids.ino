@@ -3,10 +3,10 @@
 #include <Logging.h>
 
 // Weird thing I had to do to get the Logging library working with teensy
-extern "C"{
-  int _getpid(){ return -1;}
+extern "C" {
+  int _getpid() { return -1; }
   int _kill(int pid, int sig){ return -1; }
-  int _write(){return -1;}
+  int _write() {return -1; }
 }
 
 #define LOGLEVEL LOG_LEVEL_INFOS
