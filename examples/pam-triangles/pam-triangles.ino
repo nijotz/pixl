@@ -153,7 +153,7 @@ void setup() {
   anim2 = new TriangleAnimation(viz, outer_leds, 6);
 
   anim1->init(1.0);
-  anim2->init(1.0, true);
+  anim2->init(0.9, true);
 
   FastLED.addLeds<WS2811, 6, GRB>(strip.leds, STRIP);
 
