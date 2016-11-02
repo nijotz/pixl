@@ -1,6 +1,6 @@
 #define __ASSERT_USE_STDERR
 
-#include "pixelmap/pixelmap.h"
+#include <pixelmap.h>
 #include <Assert.h>
 #include <FastLED.h>
 #include <Logging.h>

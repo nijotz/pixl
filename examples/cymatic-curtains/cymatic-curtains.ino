@@ -1,4 +1,4 @@
-#include "pixelmap/pixelmap.h"
+#include <pixelmap.h>
 #include <FastLED.h>
 #include <Logging.h>
 
