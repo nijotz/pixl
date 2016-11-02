@@ -41,7 +41,7 @@ void ScaledAnimation::upscale() {
   // Every 3 LEDs. (10 - 1) / (4 - 1) = 3
   // LEDs:   | | | | | | | | | |
   // Viz:    +     +     +     +
-  double scale = ((double)led_length - 1.0) / ((double)viz_length - 1.0);
+  float scale = ((float)led_length - 1.0) / ((float)viz_length - 1.0);
 
   // Set up start and end fence posts
   leds_[0] = viz_->viz[0];
@@ -50,7 +50,7 @@ void ScaledAnimation::upscale() {
   // Fill in the middle
   for (int i = 1; i < led_length - 1; i++) {
     // Where along the viz array this LED should get its color (decimal)
-    double index = (double)i / scale;
+    float index = (float)i / scale;
 
     // Get the indices of the two viz colors this LED will blend
     int index1 = (int)floor(index);
@@ -75,12 +75,22 @@ void ScaledAnimation::upscale() {
   }
 }
 
-// Nearest neighbor downscale
+// Example: If there are 5 LEDs and 3 viz colors, the first color will be
+// at 0, the last color at 4, and the other should be at 2.  0, 2, 4.
+// Every 2 LEDs. (5 - 1) / (3 - 1) = 2
+// LEDs:   | | | | |
+// Viz:    +   +   +
+//
+// Example: If there are 10 LEDs and 4 viz colors, the first color will be
+// at 0, the last color at 9, leaving the other two at 3 and 6. 0, 3, 6, 9.
+// Every 3 LEDs. (10 - 1) / (4 - 1) = 3
+// LEDs:   | | | | | | | | | |
+// Viz:    +     +     +     +
 void ScaledAnimation::downscale() {
   int led_length = leds_.length();
   int viz_length = viz_->getSize();
 
-  double scale = ((double)viz_length - 1) / ((double)led_length - 1);
+  float scale = ((float)viz_length - 1) / ((float)led_length - 1);
 
   for(int i = 0; i < led_length; i++) {
     leds_[i] = viz_->viz[(int)(i * scale)];
@@ -91,6 +101,7 @@ void ScaledAnimation::draw(float interpolation) {
   int led_length = leds_.length();
   int viz_length = viz_->getSize();
 
+  // Upscale
   if (led_length > viz_length) {
     upscale();
   }
