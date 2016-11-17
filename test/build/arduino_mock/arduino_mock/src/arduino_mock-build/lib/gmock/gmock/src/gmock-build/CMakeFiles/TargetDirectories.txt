@@ -1,0 +1,4 @@
+/Users/nick/src/pixelmap/test/build/arduino_mock/arduino_mock/src/arduino_mock-build/lib/gmock/gmock/src/gmock-build/CMakeFiles/gmock.dir
+/Users/nick/src/pixelmap/test/build/arduino_mock/arduino_mock/src/arduino_mock-build/lib/gmock/gmock/src/gmock-build/CMakeFiles/gmock_main.dir
+/Users/nick/src/pixelmap/test/build/arduino_mock/arduino_mock/src/arduino_mock-build/lib/gmock/gmock/src/gmock-build/gtest/CMakeFiles/gtest.dir
+/Users/nick/src/pixelmap/test/build/arduino_mock/arduino_mock/src/arduino_mock-build/lib/gmock/gmock/src/gmock-build/gtest/CMakeFiles/gtest_main.dir

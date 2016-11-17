@@ -12,7 +12,9 @@ class RippleVisualization : public Visualization {
     RippleVisualization(Input* input, int size = 1, int smoothing = 1, bool freq = false);
     ~RippleVisualization();
     void update();
+    void 
   private:
+    //TODO: caps here
     void update_freq();
     void update_amp();
     void pushRipples(float value);

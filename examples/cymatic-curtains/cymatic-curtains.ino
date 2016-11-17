@@ -27,6 +27,14 @@ CurtainAnimation* anim2;
 CurtainAnimation* anim3;
 CurtainAnimation* anim4;
 
+// Audio shield setup
+AudioInputI2S audio;
+AudioAnalyzePeak peak;
+AudioAnalyzeNoteFrequency note;
+AudioConnection patchCord1(audio, peak);
+AudioConnection patchCord2(audio, note);
+AudioControlSGTL5000 audioShield;
+
 void setup() {
   Log.Init(LOGLEVEL, 9600);
   delay(1000);
@@ -34,15 +42,13 @@ void setup() {
   Serial.flush();
   delay(1000);
 
-  //input = new NoteInput();
-  input = new MSGEQ7Input(
-    1,    // left pin
-    0,    // right pin
-    12,   // strobe pin
-    13,   // reset pin,
-    1000, // max amplitude
-    250   // min amplutide
-  );
+  AudioMemory(30);
+  audioShield.enable();
+  audioShield.inputSelect(AUDIO_INPUT_MIC);
+  audioShield.micGain(50);
+  note.begin(.75);
+
+  input = new AudioShieldInput(&peak, &note);
 
   viz = new RippleVisualization(input, 60);
 
@@ -92,7 +98,7 @@ void setup() {
     -0.5,   // y "
      0.0);  // z "
 
-  FastLED.addLeds<WS2811, 6, RGB>(strip.leds, 600);
+  FastLED.addLeds<WS2811, 2, RGB>(strip.leds, 600);
   FastLED.show();
 
   Looper* looper = Looper::instance();
@@ -108,5 +114,8 @@ void setup() {
 }
 
 void loop() {
+  AudioNoInterrupts();
   Looper::instance()->loop();
+  AudioInterrupts();
+  delay(10);
 }

@@ -1,0 +1,3 @@
+repository='external project URL'
+module='https://github.com/ikeyasu/arduino-mock/archive/0.0.1.zip'
+tag=''

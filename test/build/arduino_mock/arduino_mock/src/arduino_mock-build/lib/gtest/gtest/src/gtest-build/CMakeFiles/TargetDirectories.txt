@@ -1,0 +1,2 @@
+/Users/nick/src/pixelmap/test/build/arduino_mock/arduino_mock/src/arduino_mock-build/lib/gtest/gtest/src/gtest-build/CMakeFiles/gtest.dir
+/Users/nick/src/pixelmap/test/build/arduino_mock/arduino_mock/src/arduino_mock-build/lib/gtest/gtest/src/gtest-build/CMakeFiles/gtest_main.dir
