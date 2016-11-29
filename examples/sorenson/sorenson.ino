@@ -63,18 +63,12 @@ TriangleAnimation* anim5;
 TriangleAnimation* anim6;
 
 // Audio shield setup
-//AudioInputI2S audio;
-//AudioAnalyzePeak peak;
-//AudioAnalyzeNoteFrequency note;
-//AudioConnection patchCord1(audio, peak);
-////AudioConnection patchCord2(audio, note);
-//AudioControlSGTL5000 audioShield;
-
-//AudioInputI2S            i2s1;           //xy=200,69
-//AudioOutputI2S           i2s2;           //xy=365,94
-//AudioConnection          patchCord1(i2s1, 0, i2s2, 0);
-//AudioConnection          patchCord2(i2s1, 1, i2s2, 1);
-//AudioControlSGTL5000     sgtl5000;     //xy=302,184
+AudioInputI2S audio;
+AudioAnalyzePeak peak;
+AudioAnalyzeNoteFrequency note;
+AudioConnection patchCord1(audio, peak);
+AudioConnection patchCord2(audio, note);
+AudioControlSGTL5000 audioShield;
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
@@ -83,23 +77,15 @@ void setup() {
   Serial.flush();
   delay(1000);
 
-  //AudioMemory(10);
+  AudioMemory(30);
+  audioShield.enable();
+  audioShield.inputSelect(AUDIO_INPUT_MIC);
+  audioShield.micGain(100);
+  note.begin(.90);
 
-  //sgtl5000.enable();
-  //sgtl5000.inputSelect(AUDIO_INPUT_MIC);
-  //sgtl5000.volume(0.5);
+  input = new AudioShieldInput(&peak, &note);
 
-  //AudioMemory(30);
-  //audioShield.enable();
-  //audioShield.inputSelect(AUDIO_INPUT_MIC);
-  //audioShield.micGain(50);
-  //note.begin(.75);
-
-  //input = new AudioShieldInput(&peak, &note);
-  //input = new AudioShieldLevelInput(&sgtl5000);
-  input = new WaveInput(3);
-
-  viz = new RippleVisualization(input, 165, 1);
+  viz = new RippleVisualization(input, 75, 1, true);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
@@ -181,5 +167,7 @@ void setup() {
 }
 
 void loop() {
+  AudioNoInterrupts();
   Looper::instance()->loop();
+  AudioInterrupts();
 }
