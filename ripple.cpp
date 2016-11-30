@@ -43,7 +43,7 @@ void RippleVisualization::update_amp() {
 
   int hue = 192 + (-value * 192);
   int val = 255;
-  if (value < 0.001) { val = 0; }
+  if (value < 0.1) { val = 0; }
   CRGB color = CHSV(hue, 255, val);
   PushQueue(viz, size_, color);
 }
