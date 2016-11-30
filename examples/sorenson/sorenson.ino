@@ -23,21 +23,25 @@ LEDStrip strip1 = LEDStrip(150);
 LEDStrip strip2 = LEDStrip(150);
 LEDStrip strip3 = LEDStrip(150);
 LEDStrip strip4 = LEDStrip(150);
+LEDStrip strip5 = LEDStrip(150);
+LEDStrip strip6 = LEDStrip(150);
 
 // Triangles strips, group of 3 triangles, split in hardware to make 3 groups
-LEDStrip strip5 = LEDStrip(165);
+LEDStrip strip7 = LEDStrip(165);
 
 // Curtain LEDs
 LEDs leds1 = LEDs(&strip1, 0, 150);
 LEDs leds2 = LEDs(&strip2, 0, 150);
 LEDs leds3 = LEDs(&strip3, 0, 150);
 LEDs leds4 = LEDs(&strip4, 0, 150);
+LEDs leds5 = LEDs(&strip5, 0, 150);
+LEDs leds6 = LEDs(&strip6, 0, 150);
 
 // Inner triangles
 int inner_starts[] = {37, 0, 19};
 int inner_lengths[] = {18, 19, 18};
 
-LEDStrip* strips5[] = {&strip5, &strip5, &strip5};
+LEDStrip* strips7[] = {&strip7, &strip7, &strip7};
 
 // Outer triangles
 int outer1_starts[] = {92, 55, 74};
@@ -46,21 +50,23 @@ int outer1_lengths[] = {18, 19, 18};
 int outer2_starts[] = {129, 147, 110};
 int outer2_lengths[] = {18, 18, 19};
 
-LEDs leds5 = LEDs(3, strips5, inner_starts, inner_lengths);
-LEDs leds6 = LEDs(3, strips5, outer1_starts, outer1_lengths);
-LEDs leds7 = LEDs(3, strips5, outer2_starts, outer2_lengths);
+LEDs leds7 = LEDs(3, strips7, inner_starts, inner_lengths);
+LEDs leds8 = LEDs(3, strips7, outer1_starts, outer1_lengths);
+LEDs leds9 = LEDs(3, strips7, outer2_starts, outer2_lengths);
 
-LEDs* inner_leds[] = {&leds5};
-LEDs* outer_leds[] = {&leds6, &leds7};
+LEDs* inner_leds[] = {&leds7};
+LEDs* outer_leds[] = {&leds8, &leds9};
 
 Visualization* viz;
 CurtainAnimation* anim1;
 CurtainAnimation* anim2;
 CurtainAnimation* anim3;
 CurtainAnimation* anim4;
+CurtainAnimation* anim5;
+CurtainAnimation* anim6;
 
-TriangleAnimation* anim5;
-TriangleAnimation* anim6;
+TriangleAnimation* anim7;
+TriangleAnimation* anim8;
 
 // Audio shield setup
 AudioInputI2S audio;
@@ -91,9 +97,11 @@ void setup() {
   anim2 = new CurtainAnimation(viz, leds2);
   anim3 = new CurtainAnimation(viz, leds3);
   anim4 = new CurtainAnimation(viz, leds4);
+  anim5 = new CurtainAnimation(viz, leds5);
+  anim6 = new CurtainAnimation(viz, leds6);
 
-  anim5 = new TriangleAnimation(viz, inner_leds, 1);
-  anim6 = new TriangleAnimation(viz, outer_leds, 2);
+  anim7 = new TriangleAnimation(viz, inner_leds, 1);
+  anim8 = new TriangleAnimation(viz, outer_leds, 2);
 
   // Far right curtain
   anim1->init(
@@ -139,15 +147,37 @@ void setup() {
     -0.7,   // y "
      0.0);  // z "
 
-  anim5->init(1.0);
-  anim6->init(0.6, true);
+  // Far left curtain
+  anim5->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.25,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+    -0.7,   // x distance from visualization start in ratio of visualization
+    -0.7,   // y "
+     0.0);  // z "
+
+  // Far left curtain
+  anim6->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.25,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+    -0.7,   // x distance from visualization start in ratio of visualization
+    -0.7,   // y "
+     0.0);  // z "
+
+  anim7->init(1.0);
+  anim8->init(0.6, true);
 
   FastLED.addLeds<WS2811, 21, RGB>(strip4.leds, 150);
   FastLED.addLeds<WS2811, 20, RGB>(strip3.leds, 150);
   FastLED.addLeds<WS2811, 14, RGB>(strip2.leds, 150);
   FastLED.addLeds<WS2811,  7, RGB>(strip1.leds, 150);
 
-  FastLED.addLeds<WS2811,  2, GRB>(strip5.leds, 165);
+  FastLED.addLeds<WS2811,  2, GRB>(strip7.leds, 165);
 
   FastLED.setBrightness(255);
 
@@ -160,6 +190,8 @@ void setup() {
   looper->addAnimation(anim4);
   looper->addAnimation(anim5);
   looper->addAnimation(anim6);
+  looper->addAnimation(anim7);
+  looper->addAnimation(anim8);
   looper->setUpdatesPerSecond(30);
 
   Log.Info("Finished setup()\n");
