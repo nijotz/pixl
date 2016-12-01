@@ -44,11 +44,13 @@ CurtainAnimation* anim6;
 
 // Audio shield setup
 AudioInputI2S audio;
-AudioAnalyzePeak peak;
-AudioAnalyzeNoteFrequency note;
-AudioConnection patchCord1(audio, peak);
-AudioConnection patchCord2(audio, note);
+//AudioAnalyzePeak peak;
+//AudioAnalyzeNoteFrequency note;
+//AudioConnection patchCord1(audio, peak);
+//AudioConnection patchCord2(audio, note);
 AudioControlSGTL5000 audioShield;
+AudioAnalyzeFFT1024 fft;
+AudioConnection patchCord1(audio, 0, fft, 0);
 
 void setup() {
   Log.Init(LOGLEVEL, 9600);
@@ -57,15 +59,18 @@ void setup() {
   Serial.flush();
   delay(1000);
 
-  AudioMemory(30);
+  AudioMemory(12);
   audioShield.enable();
   audioShield.inputSelect(AUDIO_INPUT_LINEIN);
   audioShield.lineInLevel(15);
   //audioShield.inputSelect(AUDIO_INPUT_MIC);
   //audioShield.micGain(100);
-  note.begin(.90);
+  //note.begin(.99);
 
-  input = new AudioShieldInput(&peak, &note);
+  fft.windowFunction(AudioWindowHanning1024);
+
+  //input = new AudioShieldInput(&peak, &note);
+  input = new FFTInput(&fft);
 
   viz = new RippleVisualization(input, 50, 1, true);
 
