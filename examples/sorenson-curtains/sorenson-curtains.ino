@@ -67,7 +67,7 @@ void setup() {
 
   input = new AudioShieldInput(&peak, &note);
 
-  viz = new RippleVisualization(input, 75, 1, true);
+  viz = new RippleVisualization(input, 50, 1, true);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
