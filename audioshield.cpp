@@ -22,7 +22,6 @@ void AudioShieldInput::update() {
 
   if (note_->available()) {
     float nt = note_->read();
-    Serial.printf("Note: %3.2f\n", nt);
     freq_ = nt / 1000.0;
     freq_ = min(1.0, freq_);
     freq_ = max(0.0, freq_);
