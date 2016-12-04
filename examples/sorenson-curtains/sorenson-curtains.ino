@@ -72,7 +72,7 @@ void setup() {
   //input = new AudioShieldInput(&peak, &note);
   input = new FFTInput(&fft);
 
-  viz = new RippleVisualization(input, 50, 1, true);
+  viz = new RippleVisualization(input, 35, 1, true);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
@@ -86,9 +86,9 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
+     0.17,  // width in ratio of visualiation
      0.0,   // rotation in radians
-     0.66,  // x distance from visualization start in ratio of visualization
+     0.75,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
@@ -97,9 +97,9 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
+     0.17,  // width in ratio of visualiation
      0.0,   // rotation in radians
-     0.33,  // x distance from visualization start in ratio of visualization
+     0.50,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
@@ -108,9 +108,9 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
+     0.17,  // width in ratio of visualiation
      0.0,   // rotation in radians
-     0.0,   // x distance from visualization start in ratio of visualization
+     0.25,   // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
@@ -119,9 +119,9 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
+     0.17,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.33,  // x distance from visualization start in ratio of visualization
+    -0.50,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
@@ -130,9 +130,9 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
+     0.17,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.66,  // x distance from visualization start in ratio of visualization
+    -0.75,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
@@ -141,9 +141,9 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
+     0.17,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -1.0,   // x distance from visualization start in ratio of visualization
+    -1.00,   // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
