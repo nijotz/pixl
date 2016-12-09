@@ -24,7 +24,6 @@ LEDStrip strip2 = LEDStrip(150);
 LEDStrip strip3 = LEDStrip(150);
 LEDStrip strip4 = LEDStrip(150);
 LEDStrip strip5 = LEDStrip(150);
-LEDStrip strip6 = LEDStrip(150);
 
 // Curtain LEDs
 LEDs leds1 = LEDs(&strip1, 0, 150);
@@ -32,7 +31,6 @@ LEDs leds2 = LEDs(&strip2, 0, 150);
 LEDs leds3 = LEDs(&strip3, 0, 150);
 LEDs leds4 = LEDs(&strip4, 0, 150);
 LEDs leds5 = LEDs(&strip5, 0, 150);
-LEDs leds6 = LEDs(&strip6, 0, 150);
 
 Visualization* viz;
 CurtainAnimation* anim1;
@@ -69,7 +67,6 @@ void setup() {
 
   fft.windowFunction(AudioWindowHanning1024);
 
-  //input = new AudioShieldInput(&peak, &note);
   input = new FFTInput(&fft);
 
   viz = new RippleVisualization(input, 35, 1, true);
@@ -79,38 +76,37 @@ void setup() {
   anim3 = new CurtainAnimation(viz, leds3);
   anim4 = new CurtainAnimation(viz, leds4);
   anim5 = new CurtainAnimation(viz, leds5);
-  anim6 = new CurtainAnimation(viz, leds6);
 
   // Far right curtain
   anim1->init(
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.17,  // width in ratio of visualiation
-     0.0,   // rotation in radians
-     0.75,  // x distance from visualization start in ratio of visualization
-    -0.5,   // y "
-     0.0);  // z "
-
-  // Middle right curtain
-  anim2->init(
-     25,    // height in pixels
-     6,     // width in pixels
-     1.0,   // height in ratio of visualiation
-     0.17,  // width in ratio of visualiation
+     0.33,  // width in ratio of visualiation
      0.0,   // rotation in radians
      0.50,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
-  // Inner right  curtain
+  // Inner right curtain
+  anim2->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.33,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+     0.17,  // x distance from visualization start in ratio of visualization
+    -0.5,   // y "
+     0.0);  // z "
+
+  // Middle curtain
   anim3->init(
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.17,  // width in ratio of visualiation
+     0.33,  // width in ratio of visualiation
      0.0,   // rotation in radians
-     0.25,   // x distance from visualization start in ratio of visualization
+    -0.17, // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
@@ -119,40 +115,28 @@ void setup() {
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.17,  // width in ratio of visualiation
+     0.33,  // width in ratio of visualiation
      0.0,   // rotation in radians
     -0.50,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
-  // Middle left curtain
+  // Far left curtain
   anim5->init(
      25,    // height in pixels
      6,     // width in pixels
      1.0,   // height in ratio of visualiation
-     0.17,  // width in ratio of visualiation
+     0.33,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.75,  // x distance from visualization start in ratio of visualization
+    -0.88,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
-  // Far left curtain
-  anim6->init(
-     25,    // height in pixels
-     6,     // width in pixels
-     1.0,   // height in ratio of visualiation
-     0.17,  // width in ratio of visualiation
-     0.0,   // rotation in radians
-    -1.00,   // x distance from visualization start in ratio of visualization
-    -0.5,   // y "
-     0.0);  // z "
-
-  FastLED.addLeds<WS2811,  7, RGB>(strip1.leds, 150);
-  FastLED.addLeds<WS2811, 14, RGB>(strip2.leds, 150);
-  FastLED.addLeds<WS2811,  2, RGB>(strip3.leds, 150);
-  FastLED.addLeds<WS2811,  6, RGB>(strip4.leds, 150);
-  FastLED.addLeds<WS2811, 20, RGB>(strip5.leds, 150);
-  FastLED.addLeds<WS2811, 21, RGB>(strip6.leds, 150);
+  FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 150);
+  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 150);
+  FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 150);
+  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150);
 
   FastLED.setBrightness(255);
 
@@ -164,7 +148,6 @@ void setup() {
   looper->addAnimation(anim3);
   looper->addAnimation(anim4);
   looper->addAnimation(anim5);
-  looper->addAnimation(anim6);
   looper->setUpdatesPerSecond(30);
 
   Log.Info("Finished setup()\n");
