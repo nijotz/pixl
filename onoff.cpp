@@ -19,7 +19,7 @@ OnOffVisualization::~OnOffVisualization() {
 }
 
 void OnOffVisualization::update() {
-  double value = input->getInput();
+  double value = input_->getInput();
 
   double sum = 0.0;
   for (int i = 0; i < smoothing_length_; i++) {

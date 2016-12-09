@@ -64,7 +64,7 @@ void FireVisualization::update() {
   }
 
   // Step 3.  Randomly ignite new 'sparks' of heat near the bottom
-  if ( (int)(255.0 * input->getInput()) < SPARKING ) {
+  if ( (int)(255.0 * input_->getInput()) < SPARKING ) {
     int i = random8(7);
     heat_[i] = qadd8( heat_[i], random8(160,255) );
   }

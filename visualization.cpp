@@ -32,7 +32,7 @@ HueVisualization::HueVisualization(Input* input, int size)
   : Visualization(input, size) {}
 
 void HueVisualization::update() {
-  float val = input->getInput();
+  float val = input_->getInput();
   viz_[0] = CHSV(val * 255, 255, 255);
 }
 

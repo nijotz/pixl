@@ -10,7 +10,7 @@ namespace pixelmap {
 class Visualization {
   public:
     Visualization(Input* input, int size = 1)
-      : input(input),
+      : input_(input),
         size_(size)
     {
       viz_ = new CRGB[size];
@@ -19,12 +19,13 @@ class Visualization {
 
     virtual void update()=0;
     int getSize() { return size_; };
+    void setInput(Input* input) { input_ = input; }
     CRGB getColorByRatio(float ratio);
     CRGB getColorByIndex(float index);
     CRGB getColorByIndex(int index);
-    Input* input;
   protected:
     CRGB* viz_;
+    Input* input_;
     int size_;
 };
 

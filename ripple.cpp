@@ -37,7 +37,7 @@ Type smooth(Type* smoothing, int length, Type value) {
 }
 
 void RippleVisualization::update_amp() {
-  float value = input->getInput();
+  float value = input_->getInput();
 
   value = smooth(smoothing_amp_, smoothing_length_, value);
 
@@ -45,12 +45,12 @@ void RippleVisualization::update_amp() {
   int val = 255;
   if (value < 0.1) { val = 0; }
   CRGB color = CHSV(hue, 255, val);
-  PushQueue(viz, size_, color);
+  PushQueue(viz_, size_, color);
 }
 
 void RippleVisualization::update_freq() {
-  float amp = input->getInput(0);
-  float freq = input->getInput(1);
+  float amp = input_->getInput(0);
+  float freq = input_->getInput(1);
 
   amp = smooth(smoothing_amp_, smoothing_length_, amp);
   freq = smooth(smoothing_freq_, smoothing_length_, freq);
