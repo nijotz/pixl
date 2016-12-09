@@ -14,7 +14,7 @@ TwinkleVisualization::TwinkleVisualization(Input* input, int size)
   }
 
   // Setup up particles array
-  randomSeed(analogRead(0));
+  randomSeed(micros());
   num_particles_ = size / 3;
   particles_ = new Particle[num_particles_];
   for (int i = 0; i < num_particles_; i++) {
@@ -70,7 +70,7 @@ void TwinkleVisualization::update() {
 
         p->brightness = 0;
         p->direction = true;
-        randomSeed(analogRead(0));
+        randomSeed(micros());
         p->position = new_position;
       }
     }
