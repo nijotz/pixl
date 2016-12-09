@@ -11,10 +11,10 @@ void PassThroughAnimation::init() {}
 void PassThroughAnimation::update() {}
 
 void PassThroughAnimation::draw(float interpolation) {
-  int length = leds_.length();
   for(int i = 0; i < leds_.length(); i++) {
-    float ratio = (float)i / (float)length;
-    leds_[i] = viz_->getColorByRatio(ratio);
+    // TODO: tried by ratio to support different led length and viz length but
+    // got rounding errors and color spilled over to two pixels
+    leds_[i] = viz_->getColorByIndex(i);
   }
 }
 
