@@ -72,7 +72,7 @@ void FireVisualization::update() {
   // Step 4.  Map from heat cells to LED colors
   for (int i = 0; i < size_; i++) {
     CRGB color = HeatColor(heat_[i]);
-    viz[i] = color;
+    viz_[i] = color;
   }
 }
 

@@ -14,5 +14,5 @@ void MarchAnimation::draw(float interpolation) {
     leds_[i] = leds_[i - 1];
   }
 
-  leds_[0] = viz_->viz[0];
+  leds_[0] = viz_->getColorByIndex(0);
 }

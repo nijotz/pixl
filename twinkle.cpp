@@ -78,14 +78,14 @@ void TwinkleVisualization::update() {
 
   // Blank the viz
   for (int i = 0; i < size_; i++) {
-    viz[i] = CRGB::Black;
+    viz_[i] = CRGB::Black;
   }
 
   // Apply particles to visualization
   for (int i = 0; i < num_particles_; i++) {
     Particle p = particles_[i];
-    viz[p.position] = CRGB::White;
-    viz[p.position].fadeToBlackBy(255 - p.brightness);
+    viz_[p.position] = CRGB::White;
+    viz_[p.position].fadeToBlackBy(255 - p.brightness);
   }
 }
 

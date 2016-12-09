@@ -13,18 +13,18 @@ class Visualization {
       : input(input),
         size_(size)
     {
-      viz = new CRGB[size];
+      viz_ = new CRGB[size];
     };
-    ~Visualization() { delete[] viz; }
+    ~Visualization() { delete[] viz_; }
 
     virtual void update()=0;
     int getSize() { return size_; };
     CRGB getColorByRatio(float ratio);
     CRGB getColorByIndex(float index);
     CRGB getColorByIndex(int index);
-    CRGB* viz;
     Input* input;
   protected:
+    CRGB* viz_;
     int size_;
 };
 

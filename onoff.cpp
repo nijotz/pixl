@@ -32,7 +32,7 @@ void OnOffVisualization::update() {
 
   CRGB color = CRGB::Blue;
   color.fadeToBlackBy(255 - (255 * value));
-  viz[0] = color;
+  viz_[0] = color;
 }
 
 } // end namespace pixelmap

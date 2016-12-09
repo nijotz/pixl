@@ -11,8 +11,10 @@ void PassThroughAnimation::init() {}
 void PassThroughAnimation::update() {}
 
 void PassThroughAnimation::draw(float interpolation) {
+  int length = leds_.length();
   for(int i = 0; i < leds_.length(); i++) {
-    leds_[i] = viz_->viz[i];
+    float ratio = (float)i / (float)length;
+    leds_[i] = viz_->getColorByRatio(ratio);
   }
 }
 
@@ -44,8 +46,8 @@ void ScaledAnimation::upscale() {
   float scale = ((float)led_length - 1.0) / ((float)viz_length - 1.0);
 
   // Set up start and end fence posts
-  leds_[0] = viz_->viz[0];
-  leds_[led_length - 1] = viz_->viz[viz_length - 1];
+  leds_[0] = viz_->getColorByIndex(0);
+  leds_[led_length - 1] = viz_->getColorByIndex(viz_length - 1);
 
   // Fill in the middle
   for (int i = 1; i < led_length - 1; i++) {
@@ -57,8 +59,8 @@ void ScaledAnimation::upscale() {
     int index2 = index1 + 1;
 
     // Get the two viz colors this LED is between
-    CRGB color1 = viz_->viz[index1];
-    CRGB color2 = viz_->viz[index2];
+    CRGB color1 = viz_->getColorByIndex(index1);
+    CRGB color2 = viz_->getColorByIndex(index2);
 
     // Find how much of each viz color this LED should get
     int ratio1 = 1.0 - fmod(index, 1.0);
@@ -93,7 +95,7 @@ void ScaledAnimation::downscale() {
   float scale = ((float)viz_length - 1) / ((float)led_length - 1);
 
   for(int i = 0; i < led_length; i++) {
-    leds_[i] = viz_->viz[(int)(i * scale)];
+    leds_[i] = viz_->getColorByIndex((int)(i * scale));
   }
 }
 
@@ -113,6 +115,6 @@ void ScaledAnimation::draw(float interpolation) {
 
   // Pass through
   for(int i = 0; i < led_length; i++) {
-    leds_[i] = viz_->viz[i];
+    leds_[i] = viz_->getColorByIndex(i);
   }
 }

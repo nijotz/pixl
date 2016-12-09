@@ -15,8 +15,8 @@ CRGB Visualization::getColorByRatio(float ratio) {
 CRGB Visualization::getColorByIndex(float index) {
   assert(index >= 0);
   assert(index < size_);
-  CRGB color1 = viz[(int)floor(index)];
-  CRGB color2 = viz[(int)ceil(index)];
+  CRGB color1 = viz_[(int)floor(index)];
+  CRGB color2 = viz_[(int)ceil(index)];
   color1 /= 2;
   color2 /= 2;
   return color1 + color2;
@@ -25,7 +25,7 @@ CRGB Visualization::getColorByIndex(float index) {
 CRGB Visualization::getColorByIndex(int index) {
   assert(index >= 0);
   assert(index < size_);
-  return viz[index];
+  return viz_[index];
 }
 
 HueVisualization::HueVisualization(Input* input, int size)
@@ -33,7 +33,7 @@ HueVisualization::HueVisualization(Input* input, int size)
 
 void HueVisualization::update() {
   float val = input->getInput();
-  viz[0] = CHSV(val * 255, 255, 255);
+  viz_[0] = CHSV(val * 255, 255, 255);
 }
 
 } // end namespace pixelmap
