@@ -15,7 +15,7 @@ TwinkleVisualization::TwinkleVisualization(Input* input, int size)
 
   // Setup up particles array
   randomSeed(micros());
-  num_particles_ = size / 3;
+  num_particles_ = size / 15;
   particles_ = new Particle[num_particles_];
   for (int i = 0; i < num_particles_; i++) {
     int brightness = random(0, 255);
@@ -84,7 +84,7 @@ void TwinkleVisualization::update() {
   // Apply particles to visualization
   for (int i = 0; i < num_particles_; i++) {
     Particle p = particles_[i];
-    viz_[p.position] = CRGB::White;
+    viz_[p.position] = CRGB(255, 175, 0); //CRGB::Yellow;
     viz_[p.position].fadeToBlackBy(255 - p.brightness);
   }
 }

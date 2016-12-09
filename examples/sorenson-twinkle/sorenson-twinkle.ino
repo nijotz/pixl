@@ -23,9 +23,7 @@ LEDStrip strip1 = LEDStrip(150);
 LEDStrip strip2 = LEDStrip(150);
 LEDStrip strip3 = LEDStrip(150);
 LEDStrip strip4 = LEDStrip(150);
-
-// Triangles strips, group of 3 triangles, split in hardware to make 3 groups
-LEDStrip strip5 = LEDStrip(165);
+LEDStrip strip5 = LEDStrip(150);
 
 LEDStrip* strips[] = {&strip1, &strip2, &strip3, &strip4, &strip5};
 int starts[] = {0, 0, 0, 0, 0, 0, 0};
@@ -43,15 +41,14 @@ void setup() {
   delay(1000);
 
   input = new RandomInput();
-  viz = new TwinkleVisualization(input, 765);
+  viz = new TwinkleVisualization(input, 750);
   anim = new PassThroughAnimation(viz, leds);
 
-  FastLED.addLeds<WS2811, 21, RGB>(strip4.leds, 150);
-  FastLED.addLeds<WS2811, 20, RGB>(strip3.leds, 150);
-  FastLED.addLeds<WS2811, 14, RGB>(strip2.leds, 150);
-  FastLED.addLeds<WS2811,  7, RGB>(strip1.leds, 150);
-
-  FastLED.addLeds<WS2811,  2, GRB>(strip5.leds, 165);
+  FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 150);
+  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 150);
+  FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 150);
+  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150);
 
   FastLED.setBrightness(255);
 

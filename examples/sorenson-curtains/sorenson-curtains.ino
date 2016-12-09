@@ -3,7 +3,7 @@
 #include <Logging.h>
 
 // Uncomment to turn off assertions
-#define NDEBUG
+//#define NDEBUG
 
 // Weird thing I had to do to get the Logging library working with teensy
 extern "C"{
@@ -12,7 +12,7 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_DEBUG
 
 using namespace pixelmap;
 
@@ -38,7 +38,16 @@ CurtainAnimation* anim2;
 CurtainAnimation* anim3;
 CurtainAnimation* anim4;
 CurtainAnimation* anim5;
-CurtainAnimation* anim6;
+
+// Twinkle LEDs
+LEDStrip* strips[] = {&strip1, &strip2, &strip3, &strip4, &strip5};
+int starts[] = {0, 0, 0, 0, 0, 0, 0};
+int lengths[] = {150, 150, 150, 150, 150, 150, 165};
+LEDs twinkle_leds = LEDs(5, strips, starts, lengths);
+
+// Twinkle animation
+Visualization* twinkle_viz;
+PassThroughAnimation* twinkle_anim;
 
 // Audio shield setup
 AudioInputI2S audio;
@@ -70,6 +79,9 @@ void setup() {
   input = new FFTInput(&fft);
 
   viz = new RippleVisualization(input, 35, 1, true);
+
+  twinkle_viz = new TwinkleVisualization(input, 750);
+  twinkle_anim = new PassThroughAnimation(twinkle_viz, twinkle_leds);
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
@@ -151,11 +163,21 @@ void setup() {
   looper->setUpdatesPerSecond(30);
 
   Log.Info("Finished setup()\n");
-  delay(100);
+  delay(1000);
 }
 
+bool switched = false;
 void loop() {
+  Looper* looper = Looper::instance();
+
   AudioNoInterrupts();
-  Looper::instance()->loop();
+  looper->loop();
   AudioInterrupts();
+
+  if (millis() > 10000 && switched == false) {
+    switched = true;
+    looper->clearAll();
+    looper->addVisualization(twinkle_viz);
+    looper->addAnimation(twinkle_anim);
+  }
 }
