@@ -21,12 +21,15 @@ Input* input;
 
 LEDStrip strip = LEDStrip(150);
 LEDStrip strip2 = LEDStrip(150);
+LEDStrip strip3 = LEDStrip(288);
 LEDs leds1 = LEDs(&strip, 0, 150);
 LEDs leds2 = LEDs(&strip2, 0, 150);
+LEDs leds3 = LEDs(&strip3, 0, 288);
 
 Visualization* viz;
 CurtainAnimation* anim1;
 CurtainAnimation* anim2;
+CurtainAnimation* anim3;
 
 // Audio shield setup
 AudioInputI2S audio;
@@ -45,7 +48,8 @@ void setup() {
 
   AudioMemory(30);
   audioShield.enable();
-  audioShield.inputSelect(AUDIO_INPUT_MIC);
+  //audioShield.inputSelect(AUDIO_INPUT_MIC);
+  audioShield.inputSelect(AUDIO_INPUT_LINEIN);
   audioShield.micGain(50);
   note.begin(.75);
 
@@ -55,6 +59,7 @@ void setup() {
 
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
+  anim3 = new CurtainAnimation(viz, leds3);
   delay(100);
 
   anim1->init(
@@ -77,8 +82,19 @@ void setup() {
     -0.5,   // y "
      0.0);  // z "
 
+  anim3->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.25,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+    -0.125,  // x distance from visualization start in ratio of visualization
+    -0.5,   // y "
+     0.0);  // z "
+
   FastLED.addLeds<WS2811, 2, RGB>(strip.leds, 150);
-  FastLED.addLeds<WS2811, 6, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 14, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 7, RGB>(strip3.leds, 150);
   //FastLED.show();
 
   Looper* looper = Looper::instance();
@@ -86,6 +102,7 @@ void setup() {
   looper->addVisualization(viz);
   looper->addAnimation(anim1);
   looper->addAnimation(anim2);
+  looper->addAnimation(anim3);
   looper->setUpdatesPerSecond(30);
 
   Log.Info("Finished setup()\n");
