@@ -2,7 +2,7 @@
 #include "input.h"
 #include <Audio.h>
 
-namespace pixelmap {
+namespace pixl {
 
 class FFTInput : public Input {
   public:
@@ -16,4 +16,4 @@ class FFTInput : public Input {
     float freq_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

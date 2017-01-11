@@ -1,7 +1,7 @@
 #include <FastLED.h>
 #include "disco.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
 void DiscoAnimation::draw(float interp) {
   // First, we black out all the LEDs

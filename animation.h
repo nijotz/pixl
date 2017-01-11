@@ -2,7 +2,7 @@
 #include "leds.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 /* An Animation takes a visualization and maps it to LED segments */
 class Animation {
@@ -38,4 +38,4 @@ class PassThroughAnimation : public Animation {
     Visualization* viz_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

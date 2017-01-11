@@ -4,9 +4,9 @@
 #include <Logging.h>
 #include <Audio.h>
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 FFTInput::FFTInput(AudioAnalyzeFFT1024* fft)
   : fft_(fft), amp_(0.0), freq_(0.0) {}
@@ -62,6 +62,6 @@ float FFTInput::getInput(int index) {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl
 
 #endif

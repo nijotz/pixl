@@ -1,7 +1,7 @@
 #pragma once
 #include <Arduino.h>
 
-namespace pixelmap {
+namespace pixl {
 
 /* An Input is an interface for Visualizations to use. getInput() returns a
    float between 0 and 1. */
@@ -87,4 +87,4 @@ class ButtonInput : public Input {
     bool released_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

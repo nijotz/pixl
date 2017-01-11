@@ -1,6 +1,6 @@
 #define __ASSERT_USE_STDERR
 
-#include <pixelmap.h>
+#include <pixl.h>
 #include <Assert.h>
 #include <FastLED.h>
 #include <Logging.h>
@@ -16,7 +16,7 @@
 #define STAFF_PIN 6
 #define RING_PIN 7
 
-using namespace pixelmap;
+using namespace pixl;
 
 RandomInput input = RandomInput();
 LEDStrip staff = LEDStrip(STAFF_LEDS);

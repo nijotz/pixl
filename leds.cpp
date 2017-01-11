@@ -1,7 +1,7 @@
 #include "assert.h"
 #include "leds.h"
 
-namespace pixelmap {
+namespace pixl {
 
 LEDStrip::LEDStrip(int length)
   : length(length)
@@ -85,4 +85,4 @@ void LEDs::fillSolid(CRGB color) {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

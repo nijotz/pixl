@@ -1,4 +1,4 @@
-#include <pixelmap.h>
+#include <pixl.h>
 #include <FastLED.h>
 #include <Logging.h>
 #include <Audio.h>
@@ -15,7 +15,7 @@ extern "C" {
 
 #define LOGLEVEL LOG_LEVEL_INFOS
 
-using namespace pixelmap;
+using namespace pixl;
 
 
 // Triangles strip, in series, 3 groups of 3 triangles, inner -> outer -> outer

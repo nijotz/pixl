@@ -38,7 +38,7 @@
 // Default 120, suggested range 50-200.
 #define SPARKING 175
 
-namespace pixelmap {
+namespace pixl {
 
 FireVisualization::FireVisualization(Input* input, int size)
   : Visualization(input, size)
@@ -76,4 +76,4 @@ void FireVisualization::update() {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

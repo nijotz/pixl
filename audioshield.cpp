@@ -8,9 +8,9 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 AudioShieldInput::AudioShieldInput(AudioAnalyzePeak* peak, AudioAnalyzeNoteFrequency* note)
   : peak_(peak), note_(note), amp_(0.0), freq_(0.0) {}
@@ -38,6 +38,6 @@ float AudioShieldInput::getInput(int index) {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl
 
 #endif

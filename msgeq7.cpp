@@ -1,9 +1,9 @@
 #include "msgeq7.h"
 #include <Logging.h>
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 MSGEQ7Input::MSGEQ7Input(int left_pin, int right_pin,
                          int strobe_pin, int reset_pin,
@@ -185,4 +185,4 @@ float MSGEQ7Input::getInput(int index) {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

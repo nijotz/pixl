@@ -3,7 +3,7 @@
 #include "leds.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 class TriangleAnimation : public Animation {
   public:
@@ -23,4 +23,4 @@ class TriangleAnimation : public Animation {
     float* mapping_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

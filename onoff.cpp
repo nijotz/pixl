@@ -1,8 +1,8 @@
-#include "pixelmap.h"
+#include "pixl.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 OnOffVisualization::OnOffVisualization(Input* input, int smoothing)
     : Visualization(input, 1),
@@ -35,4 +35,4 @@ void OnOffVisualization::update() {
   viz_[0] = color;
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

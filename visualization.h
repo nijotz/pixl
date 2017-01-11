@@ -2,7 +2,7 @@
 #include <FastLED.h>
 #include "input.h"
 
-namespace pixelmap {
+namespace pixl {
 
 /* A Visualization is an interface to an n-dimensional set of colors to be used
    in Animations.  Colors are stored as FastLED's CHSV class to make it easier
@@ -42,4 +42,4 @@ class NullVisualization : public Visualization {
     void update() {};
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

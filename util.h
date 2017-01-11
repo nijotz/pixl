@@ -1,8 +1,8 @@
 #pragma once
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 template <typename Type>
 Type PushQueue(Type* array, int length, Type value) {
@@ -14,4 +14,4 @@ Type PushQueue(Type* array, int length, Type value) {
   return rtrn;
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

@@ -3,7 +3,7 @@
 #include <Logging.h>
 #include <Math.h>
 
-using namespace pixelmap;
+using namespace pixl;
 
 CurtainAnimation::CurtainAnimation(Visualization* viz, LEDs& leds)
   : leds_(leds),
