@@ -3,7 +3,6 @@
 #include "curtain.h"
 #include "disco.h"
 #include "fire.h"
-#include "fft.h"
 #include "input.h"
 #include "leds.h"
 #include "looper.h"
@@ -18,4 +17,5 @@
 
 #if defined(__MK20DX256__) || defined(__MK20DX128__)
 #include "audioshield.h"
+#include "fft.h"
 #endif
