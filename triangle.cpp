@@ -9,7 +9,6 @@ TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs** leds, int num_le
       viz_(viz) {}
 
 TriangleAnimation::~TriangleAnimation() {
-  delete[] leds_;
   delete[] mapping_;
 }
 
