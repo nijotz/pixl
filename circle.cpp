@@ -16,9 +16,9 @@ void CircleAnimation::init() {}
 void CircleAnimation::init(float scale) {
   Log.Info("Setting up Circle animation\n");
 
+  int length = leds_[0]->length();
   mapping_ = new float[length];
 
-  int length = leds_[0].length();
   int radius = length / 2 * 3.1415;
   for (int i = 0; i < length; i++) {
     float radians = (float)(i / (length - 1)) * (2.0 * 3.1415);
