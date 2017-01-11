@@ -12,26 +12,26 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_DEBUG
 
 using namespace pixl;
 
 Input* input;
 
+LEDStrip strip = LEDStrip(165 + 150);
+
 // Triangle
-LEDStrip triangle_strip = LEDStrip(165);
 int triangle_points[] = {37, 0, 19};
 int triangle_edges[] = {18, 19, 18};
-LEDStrip* triangle_strips[] = {&triangle_strip};
+LEDStrip* triangle_strips[] = {&strip, &strip, &strip};
 LEDs triangle_led = LEDs(3, triangle_strips, triangle_points, triangle_edges);
 LEDs* triangle_leds[] = {&triangle_led};
 TriangleAnimation* triangle_anim;
-CircleAnimation* circle_anim;
 
 // Circle
-LEDStrip circle_strip = LEDStrip(150);
-LEDs circle_led = LEDs(circle_strip, 0, 150);
+LEDs circle_led = LEDs(&strip, 165, 150);
 LEDs* circle_leds[] = {&circle_led};
+CircleAnimation* circle_anim;
 
 Visualization* viz;
 
@@ -63,7 +63,8 @@ void setup() {
   fft.windowFunction(AudioWindowHanning1024);
 
   //input = new AudioShieldInput(&peak, &note);
-  input = new FFTInput(&fft);
+  //input = new FFTInput(&fft);
+  input = new WaveInput();
 
   viz = new RippleVisualization(input, 50, 1, true);
   triangle_anim = new TriangleAnimation(viz, triangle_leds, 1);
@@ -72,8 +73,7 @@ void setup() {
   triangle_anim->init(1.0);
   circle_anim->init(1.0);
 
-  FastLED.addLeds<WS2811, 2, GRB>(triangle_strip.leds, 165);
-  FastLED.addLeds<WS2811, 2, GRB>(circle_strip.leds, 150);
+  FastLED.addLeds<WS2811, 2, GRB>(strip.leds, 165 + 150);
   FastLED.setBrightness(255);
 
   Looper* looper = Looper::instance();
