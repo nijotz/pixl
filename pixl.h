@@ -1,5 +1,6 @@
 #pragma once
 #include "animation.h"
+#include "circle.h"
 #include "curtain.h"
 #include "disco.h"
 #include "fire.h"
