@@ -18,18 +18,18 @@ using namespace pixl;
 
 Input* input;
 
-LEDStrip strip = LEDStrip(165 + 150);
+int triangle_length = 57;
+int circle_length = 75;
+int length = triangle_length + circle_length;
+LEDStrip strip = LEDStrip(length);
 
 // Triangle
-int triangle_points[] = {37, 0, 19};
-int triangle_edges[] = {18, 19, 18};
-LEDStrip* triangle_strips[] = {&strip, &strip, &strip};
-LEDs triangle_led = LEDs(3, triangle_strips, triangle_points, triangle_edges);
+LEDs triangle_led = LEDs(&strip, 0, triangle_length);
 LEDs* triangle_leds[] = {&triangle_led};
 TriangleAnimation* triangle_anim;
 
 // Circle
-LEDs circle_led = LEDs(&strip, 165, 150);
+LEDs circle_led = LEDs(&strip, triangle_length, circle_length);
 LEDs* circle_leds[] = {&circle_led};
 CircleAnimation* circle_anim;
 
@@ -73,14 +73,14 @@ void setup() {
   triangle_anim->init(1.0);
   circle_anim->init(1.0);
 
-  FastLED.addLeds<WS2811, 2, GRB>(strip.leds, 165 + 150);
+  FastLED.addLeds<WS2811, 2, GRB>(strip.leds, length);
   FastLED.setBrightness(255);
 
   Looper* looper = Looper::instance();
   looper->addInput(input);
   looper->addVisualization(viz);
   looper->addAnimation(triangle_anim);
-  looper->addAnimation(circle_anim);
+  //looper->addAnimation(circle_anim);
   looper->setUpdatesPerSecond(30);
 
   Log.Info("Finished setup()\n");
