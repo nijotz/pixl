@@ -8,8 +8,9 @@ using namespace pixl;
 
 namespace pixl {
 
-FFTInput::FFTInput(AudioAnalyzeFFT1024* fft)
-  : fft_(fft), amp_(0.0), freq_(0.0) {}
+FFTInput::FFTInput(AudioAnalyzeFFT1024* fft, int start, int range)
+  : fft_(fft), amp_(0.0), freq_(0.0),
+    start_(start), range_(range) {}
 
 void FFTInput::update() {
   if (fft_->available()) {
@@ -17,7 +18,7 @@ void FFTInput::update() {
     int max_value = 0;
     int max_index = 0;
 
-    for (int i = 0; i < 511; i++) {
+    for (int i = start_; i < range_; i++) {
       int value = fft_->output[i];
       float delta = (float)value / (float)max_[i];
 
@@ -44,7 +45,7 @@ void FFTInput::update() {
     Log.Debug("max index: %d\n", max_index);
     Log.Debug("max value: %d\n", max_value);
 
-    freq_ = (float)max_index / 511.0;
+    freq_ = (float)max_index / (range_ - 1);
     freq_ = min(1.0, freq_);
 
     amp_ = (float)max_value / 6000.0;
