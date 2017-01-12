@@ -19,14 +19,20 @@ void CircleAnimation::init(float scale) {
   int length = leds_[0]->length();
   mapping_ = new float[length];
 
-  int radius = length / 2 * 3.1415;
+  float radius = (float)length / (2.0 * 3.1415);
+  Log.Debug("Radius: %d (x1000)\n", (int)(radius * 1000.0));
+
+  float viz_scaled = viz_->getSize() * scale;
+
   for (int i = 0; i < length; i++) {
-    float radians = (float)(i / (length - 1)) * (2.0 * 3.1415);
+    float radians = ((float)i / ((float)length - 1.0)) * (2.0 * 3.1415);
     float a = sin(radians) * radius;
     float b = cos(radians) * radius;
     float y = radius - b;
     float x = sqrt(a * a + y * y);
-    mapping_[i] = x;
+    float map = x / viz_scaled;
+    mapping_[i] = x / viz_scaled;
+    Log.Debug("Mapping of %d: %d (x1000)\n", i, (int)(map * 1000.0));
   }
 
   Log.Info("Finished setting up Circle animation\n");
