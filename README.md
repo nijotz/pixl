@@ -1,5 +1,5 @@
 # Intro
-pixl is a library to make LED mapping and animations more modular and easier to
+Audiolux is a library to make sound-reactive LED mapping and animations more modular and easier to
 setup.
 
 # Install
