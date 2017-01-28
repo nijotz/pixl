@@ -149,8 +149,10 @@ void setup() {
 
   AudioMemory(30);
   audioShield.enable();
-  audioShield.inputSelect(AUDIO_INPUT_MIC);
-  audioShield.micGain(50);
+  //audioShield.inputSelect(AUDIO_INPUT_MIC);
+  //audioShield.micGain(50);
+  audioShield.inputSelect(AUDIO_INPUT_LINEIN);
+  audioShield.lineInLevel(15);
   note.begin(.75);
 
   input = new AudioShieldInput(&peak, &note);
