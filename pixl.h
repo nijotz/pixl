@@ -10,6 +10,7 @@
 #include "march.h"
 #include "msgeq7.h"
 #include "onoff.h"
+#include "perlin.h"
 #include "ripple.h"
 #include "triangle.h"
 #include "twinkle.h"
