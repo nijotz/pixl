@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 2.8.8)
 project (arduino_mock_sample)
 
-add_subdirectory(arduino_mock)
+add_subdirectory(arduino-mock)
 
 include_directories(
     ${ARDUINO_MOCK_INCLUDE_DIRS}
@@ -20,7 +20,7 @@ target_link_libraries(arduino_mock_sample
     ${CMAKE_THREAD_LIBS_INIT}
 )
 
-add_dependencies(arduino_mock_sample arduino_mock)
+add_dependencies(arduino_mock_sample arduino-mock)
 
 enable_testing()
 add_test(arduino_mock_sample_1 arduino_mock_sample)
