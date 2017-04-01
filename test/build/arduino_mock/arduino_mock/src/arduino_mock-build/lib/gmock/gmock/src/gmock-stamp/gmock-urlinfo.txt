@@ -1,3 +1,0 @@
-repository='external project URL'
-module='https://github.com/paulsapps/gmock-1.7.0/archive/master.zip'
-tag=''

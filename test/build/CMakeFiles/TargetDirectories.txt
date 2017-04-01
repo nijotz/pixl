@@ -1,2 +1,0 @@
-/Users/nick/src/pixelmap/test/build/arduino_mock/CMakeFiles/arduino_mock.dir
-/Users/nick/src/pixelmap/test/build/CMakeFiles/arduino_mock_sample.dir
