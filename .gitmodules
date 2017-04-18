@@ -1,3 +1,0 @@
-[submodule "test/arduino-mock"]
-	path = test/arduino-mock
-	url = git@github.com:ikeyasu/arduino-mock.git

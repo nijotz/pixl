@@ -197,3 +197,11 @@ void loop() {
   Looper::instance()->loop();
 }
 ```
+
+# Test
+```
+cd test
+mkdir build
+cd build
+cmake ..
+```
