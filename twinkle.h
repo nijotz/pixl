@@ -2,7 +2,7 @@
 #include "input.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 struct Particle {
   int brightness;
@@ -22,4 +22,4 @@ class TwinkleVisualization : public Visualization {
     int num_particles_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

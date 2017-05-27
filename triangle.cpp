@@ -1,7 +1,7 @@
 #include "triangle.h"
 #include <Logging.h>
 
-using namespace pixelmap;
+using namespace pixl;
 
 TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs** leds, int num_leds)
     : leds_(leds),
@@ -9,7 +9,6 @@ TriangleAnimation::TriangleAnimation(Visualization* viz, LEDs** leds, int num_le
       viz_(viz) {}
 
 TriangleAnimation::~TriangleAnimation() {
-  delete[] leds_;
   delete[] mapping_;
 }
 

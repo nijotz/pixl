@@ -12,37 +12,27 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_DEBUG
 
 using namespace pixl;
 
 Input* input;
 
-LEDStrip strip = LEDStrip(165);
+int triangle_length = 75;
+int circle_length = 90;
+LEDStrip strip = LEDStrip(300);
 
-// Inner triangles
-int inner_starts[] = {37, 0, 19};
-int inner_lengths[] = {18, 19, 18};
+// Triangle
+LEDs triangle_led = LEDs(&strip, 150, triangle_length);
+LEDs* triangle_leds[] = {&triangle_led};
+TriangleAnimation* triangle_anim;
 
-LEDStrip* strips[] = {&strip, &strip, &strip};
-
-// Outer triangles
-int outer1_starts[] = {92, 55, 74};
-int outer1_lengths[] = {18, 19, 18};
-
-int outer2_starts[] = {129, 147, 110};
-int outer2_lengths[] = {18, 18, 19};
-
-LEDs leds1 = LEDs(3, strips, inner_starts, inner_lengths);
-LEDs leds2 = LEDs(3, strips, outer1_starts, outer1_lengths);
-LEDs leds3 = LEDs(3, strips, outer2_starts, outer2_lengths);
-
-LEDs* inner_leds[] = {&leds1};
-LEDs* outer_leds[] = {&leds2, &leds3};
+// Circle
+LEDs circle_led = LEDs(&strip, 0, circle_length);
+LEDs* circle_leds[] = {&circle_led};
+CircleAnimation* circle_anim;
 
 Visualization* viz;
-TriangleAnimation* anim1;
-TriangleAnimation* anim2;
 
 // Audio shield setup
 AudioInputI2S audio;
@@ -61,7 +51,7 @@ void setup() {
   Serial.flush();
   delay(1000);
 
-  AudioMemory(12);
+  AudioMemory(10);
   audioShield.enable();
   audioShield.inputSelect(AUDIO_INPUT_LINEIN);
   audioShield.lineInLevel(15);
@@ -73,23 +63,23 @@ void setup() {
 
   //input = new AudioShieldInput(&peak, &note);
   input = new FFTInput(&fft);
+  //input = new WaveInput();
 
-  viz = new RippleVisualization(input, 165, 1, true);
-  anim1 = new TriangleAnimation(viz, inner_leds, 1);
-  anim2 = new TriangleAnimation(viz, outer_leds, 2);
+  viz = new RippleVisualization(input, 50, 1, true);
+  triangle_anim = new TriangleAnimation(viz, triangle_leds, 1);
+  circle_anim = new CircleAnimation(viz, circle_leds, 1);
 
-  anim1->init(1.0);
-  anim2->init(1.0, true);
+  triangle_anim->init(1.0);
+  circle_anim->init(1.0);
 
-  FastLED.addLeds<WS2811, 2, GRB>(strip.leds, 165);
-
+  FastLED.addLeds<WS2811, 2, GRB>(strip.leds, 300);
   FastLED.setBrightness(255);
 
   Looper* looper = Looper::instance();
   looper->addInput(input);
   looper->addVisualization(viz);
-  looper->addAnimation(anim1);
-  looper->addAnimation(anim2);
+  looper->addAnimation(triangle_anim);
+  looper->addAnimation(circle_anim);
   looper->setUpdatesPerSecond(30);
 
   Log.Info("Finished setup()\n");

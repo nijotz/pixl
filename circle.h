@@ -5,14 +5,12 @@
 
 namespace pixl {
 
-class TriangleAnimation : public Animation {
+class CircleAnimation : public Animation {
   public:
-    TriangleAnimation(Visualization* viz, LEDs* leds[], int num_leds);
-    ~TriangleAnimation();
+    CircleAnimation(Visualization* viz, LEDs* leds[], int num_leds);
+    ~CircleAnimation();
     void init();
-    void init(float scale, bool outer = false);
-    void init_inner(float scale);
-    void init_outer(float scale);
+    void init(float scale);
     void update();
     void draw(float interpolation);
 

@@ -6,7 +6,7 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
-namespace pixelmap {
+namespace pixl {
 
 class AudioShieldInput : public Input {
   public:
@@ -20,4 +20,4 @@ class AudioShieldInput : public Input {
     float freq_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

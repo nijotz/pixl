@@ -2,7 +2,7 @@
 #include "input.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 class OnOffVisualization : public Visualization {
   public:
@@ -14,4 +14,4 @@ class OnOffVisualization : public Visualization {
     int smoothing_length_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

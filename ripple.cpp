@@ -1,8 +1,8 @@
-#include "pixelmap.h"
+#include "pixl.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 RippleVisualization::RippleVisualization(Input* input, int size, int smoothing, bool freq)
     : Visualization(input, size),
@@ -70,4 +70,4 @@ void RippleVisualization::update() {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl
