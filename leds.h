@@ -1,7 +1,7 @@
 #pragma once
 #include <FastLED.h>
 
-namespace pixelmap {
+namespace pixl {
 
 /* LEDStrip represents a FastLED-compatible LED strip. */
 class LEDStrip {
@@ -34,4 +34,4 @@ class LEDs {
     int reverse_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

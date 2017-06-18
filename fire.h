@@ -3,7 +3,7 @@
 #include "leds.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 class FireVisualization : public Visualization {
   public:
@@ -14,4 +14,4 @@ class FireVisualization : public Visualization {
     byte* heat_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

@@ -1,8 +1,8 @@
-#include "pixelmap.h"
+#include "pixl.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 TwinkleVisualization::TwinkleVisualization(Input* input, int size)
     : Visualization(input, size) {
@@ -89,4 +89,4 @@ void TwinkleVisualization::update() {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

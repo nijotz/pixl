@@ -1,9 +1,9 @@
 #include <assert.h>
-#include "pixelmap.h"
+#include "pixl.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
-namespace pixelmap {
+namespace pixl {
 
 CRGB Visualization::getColorByRatio(float ratio) {
   assert(ratio >= 0);
@@ -36,4 +36,4 @@ void HueVisualization::update() {
   viz_[0] = CHSV(val * 255, 255, 255);
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

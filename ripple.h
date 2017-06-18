@@ -2,7 +2,7 @@
 #include "input.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 template <typename Type>
 void PushStack(Type* array, int length, Type value);
@@ -22,4 +22,4 @@ class RippleVisualization : public Visualization {
     bool freq_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

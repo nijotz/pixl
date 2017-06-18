@@ -1,6 +1,6 @@
 #include "looper.h"
 
-namespace pixelmap {
+namespace pixl {
 
 Looper* Looper::looper_ = 0;
 
@@ -81,4 +81,4 @@ void Looper::draw_(float interp) {
   }
 }
 
-} // end namespace pixelmap
+} // end namespace pixl

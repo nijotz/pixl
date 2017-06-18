@@ -1,6 +1,6 @@
 #include "march.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
 MarchAnimation::MarchAnimation(Visualization* viz, LEDs& leds)
   : leds_(leds),

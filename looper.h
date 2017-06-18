@@ -4,7 +4,7 @@
 #include "input.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 /* The Looper is a singleton that is responsible for calling update() and
    draw() on Inputs, Visualizations, and Animations */
@@ -53,4 +53,4 @@ class Looper {
     Input* inputs_[10];
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

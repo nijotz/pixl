@@ -1,7 +1,7 @@
 #include <Assert.h>
 #include "animation.h"
 
-using namespace pixelmap;
+using namespace pixl;
 
 PassThroughAnimation::PassThroughAnimation(Visualization* viz, LEDs& leds)
   : leds_(leds),

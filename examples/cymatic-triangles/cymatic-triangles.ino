@@ -1,4 +1,4 @@
-#include <pixelmap.h>
+#include <pixl.h>
 #include <FastLED.h>
 #include <Logging.h>
 
@@ -11,7 +11,7 @@ extern "C"{
 
 #define LOGLEVEL LOG_LEVEL_DEBUG
 
-using namespace pixelmap;
+using namespace pixl;
 
 Input* input;
 

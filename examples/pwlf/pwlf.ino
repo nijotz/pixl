@@ -23,11 +23,11 @@ using namespace pixl;
 #define GROUP TRIANGLE * 3
 #define STRIP GROUP * 3
 
-#define IN_START1 18
-#define IN_START2 36
-#define IN_START3 0
-#define IN_LENGTH1 18
-#define IN_LENGTH2 19
+#define IN_START1 36
+#define IN_START2 0
+#define IN_START3 18
+#define IN_LENGTH1 19
+#define IN_LENGTH2 18
 #define IN_LENGTH3 18
 
 #define OUT1_START1 37
@@ -46,7 +46,10 @@ using namespace pixl;
 
 Input* input;
 
+int circle_length = 30;
+
 LEDStrip strip = LEDStrip(STRIP);
+LEDStrip strip2 = LEDStrip(150);
 LEDStrip* strips[] = {&strip, &strip, &strip};
 
 // Inner triangles
@@ -119,6 +122,11 @@ LEDs leds9 = LEDs(3, strips, out2_starts3, out2_lengths);
 
 LEDs* outer_leds[] = {&leds4, &leds5, &leds6, &leds7, &leds8, &leds9};
 
+// Circle
+LEDs circle_led = LEDs(&strip2, 0, circle_length);
+LEDs* circle_leds[] = {&circle_led};
+CircleAnimation* circle_anim;
+
 Visualization* viz;
 
 TriangleAnimation* anim1;
@@ -141,8 +149,10 @@ void setup() {
 
   AudioMemory(30);
   audioShield.enable();
-  audioShield.inputSelect(AUDIO_INPUT_MIC);
-  audioShield.micGain(50);
+  //audioShield.inputSelect(AUDIO_INPUT_MIC);
+  //audioShield.micGain(50);
+  audioShield.inputSelect(AUDIO_INPUT_LINEIN);
+  audioShield.lineInLevel(15);
   note.begin(.75);
 
   input = new AudioShieldInput(&peak, &note);
@@ -152,10 +162,15 @@ void setup() {
   anim1 = new TriangleAnimation(viz, inner_leds, 3);
   anim2 = new TriangleAnimation(viz, outer_leds, 6);
 
+  // Adds LED Microphone
+  circle_anim = new CircleAnimation(viz, circle_leds, 1);
+
   anim1->init(1.0);
   anim2->init(0.9, true);
+  circle_anim->init(1.0);
 
-  FastLED.addLeds<WS2811, 6, GRB>(strip.leds, STRIP);
+  FastLED.addLeds<WS2811, 14, GRB>(strip.leds, STRIP);
+  FastLED.addLeds<WS2811,  7, GRB>(strip2.leds, 150);
 
   FastLED.setBrightness(255);
 
@@ -164,6 +179,7 @@ void setup() {
   looper->addVisualization(viz);
   looper->addAnimation(anim1);
   looper->addAnimation(anim2);
+  looper->addAnimation(circle_anim);
   //looper->setFramesPerSecond(30);
   looper->setUpdatesPerSecond(30);
 

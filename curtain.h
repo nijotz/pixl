@@ -3,7 +3,7 @@
 #include "leds.h"
 #include "visualization.h"
 
-namespace pixelmap {
+namespace pixl {
 
 class CurtainAnimation : public Animation {
   public:
@@ -22,4 +22,4 @@ class CurtainAnimation : public Animation {
     double* mapping_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl

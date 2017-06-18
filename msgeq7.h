@@ -1,7 +1,7 @@
 #pragma once
 #include "input.h"
 
-namespace pixelmap {
+namespace pixl {
 
 class MSGEQ7Input : public Input {
   public:
@@ -29,4 +29,4 @@ class MSGEQ7Input : public Input {
     float freq_;
 };
 
-} // end namespace pixelmap
+} // end namespace pixl
