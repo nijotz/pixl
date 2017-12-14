@@ -59,10 +59,10 @@ void setup() {
 
   AudioMemory(12);
   audioShield.enable();
-  audioShield.inputSelect(AUDIO_INPUT_LINEIN);
-  audioShield.lineInLevel(15);
-  //audioShield.inputSelect(AUDIO_INPUT_MIC);
-  //audioShield.micGain(63);
+  //audioShield.inputSelect(AUDIO_INPUT_LINEIN);
+  //audioShield.lineInLevel(15); // not needed if this line is in the code loop. Range 0-15
+  audioShield.inputSelect(AUDIO_INPUT_MIC);
+  //audioShield.micGain(63); // not needed if this line is in the code loop. Range 0-63dB
   //note.begin(.99);
 
   fft.windowFunction(AudioWindowHanning1024);
@@ -155,6 +155,9 @@ void setup() {
 }
 
 void loop() {
+  //Code for Hardware Potentiometer Added to Teensy Audio Adapter to control either micGain or lineInLevel input volume:
+  audioShield.lineInLevel(map(analogRead(A1),0, 1023, 0, 15)); // remap analog pot A1 values 0-1023 to line in level 0-15.
+  audioShield.micGain(map(analogRead(A1), 0, 1023, 0, 63)); // remap analog pot A1 values 0-1023 to mic gain 0-63dB.
   AudioNoInterrupts();
   Looper::instance()->loop();
   AudioInterrupts();
