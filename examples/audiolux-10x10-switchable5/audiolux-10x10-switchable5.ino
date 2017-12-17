@@ -51,11 +51,16 @@ AudioInputI2S audio;
 AudioControlSGTL5000 audioShield;
 AudioAnalyzeFFT1024 fft;
 AudioConnection patchCord1(audio, 0, fft, 0);
+const int ledPin = 13;
+int ledState = LOW;
+long previousMillis = 0;
+long interval = 500;
 
 void setup() {
-  Log.Init(LOGLEVEL, 9600);
+  //Log.Init(LOGLEVEL, 9600);
   delay(1000);
   Log.Info("Starting setup()\n");
+  pinMode(ledPin, OUTPUT);
   Serial.flush();
   delay(1000);
 
@@ -65,6 +70,7 @@ void setup() {
   //audioShield.lineInLevel(15);
   audioShield.inputSelect(AUDIO_INPUT_MIC);
   audioShield.micGain(63);
+  //audioShield.lineInLevel(15);
   //note.begin(.99);
 
   fft.windowFunction(AudioWindowHanning1024);
@@ -150,28 +156,64 @@ void setup() {
   delay(100);
 }
 
-int incomingByte = 0;   // for incoming serial data
+void blink() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis > interval) {
+    previousMillis = currentMillis;
+    if (ledState == LOW)
+      ledState = HIGH;
+    else
+      ledState = LOW;
+
+    // set the LED with the ledState of the variable:
+    digitalWrite(ledPin, ledState);
+  }
+}
+
+char buffer[16];
+int len = 0;
+int size = 25;
+int smooth = 1;
+bool rippleFreq = true;
+
 void loop() {
-  //Code for Hardware Potentiometer Added to Teensy Audio Adapter to control either micGain or lineInLevel input volume:
-  //audioShield.lineInLevel(map(analogRead(A1),0, 1023, 0, 15)); // remap analog pot A1 values 0-1023 to line in level 0-15.
-  //audioShield.micGain(map(analogRead(A1), 0, 1023, 0, 63)); // remap analog pot A1 values 0-1023 to mic gain 0-63dB.
-  //if (analogRead(A1) > 800) {
-  //  setupAnim(new RippleVisualization(input, 150));
-  //}
-
   if (Serial.available() > 0) {
-            // read the incoming byte:
-            incomingByte = Serial.read();
+    // read the incoming byte:
+    int incomingByte = Serial.read();
+    buffer[len++] = incomingByte;
+    if (len >= 16) {
+      len = 0; // handle overflows
+    }
+    if (incomingByte == '\n') {
 
-            // say what you got:
-            Serial.print("I received: ");
-            Serial.println(incomingByte, DEC);
-    if (incomingByte == 49) {
-        setupAnim(new RippleVisualization(input, 25, 1, true));
-    } else if (incomingByte == 50) {
-      setupAnim(new FireVisualization(input, 150));
-    } else {
-      setupAnim(new TwinkleVisualization(input, 25));
+      blink();
+      if (buffer == "1\n") {
+        setupAnim(new RippleVisualization(input, size, smooth, rippleFreq));
+      } else if (buffer == "2\n") {
+        setupAnim(new FireVisualization(input, size));
+      } else if (buffer == "3\n") {
+        setupAnim(new TwinkleVisualization(input, size));
+      } else if (buffer[0] == 's') {
+        int n = sscanf(buffer, "s%d", &size);
+        if (n != 1) {
+          size = 25;
+        }
+      } else if (buffer[0] == 'v') {
+        int vol = 0;
+        if (sscanf(buffer, "v%d", &vol) == 1) {
+          audioShield.micGain(vol);
+          audioShield.lineInLevel(vol);
+        }
+      } else if (buffer[0] == 'm') { // smooth
+        if (sscanf(buffer, "m%d", &smooth) != 1) {
+          smooth = 1;
+        }
+      } else if (buffer[0] == 'f') {
+        if (sscanf(buffer, "f%b", &rippleFreq) != 1) {
+          rippleFreq = true;
+        }
+      }
+      len = 0;
     }
   }
 
