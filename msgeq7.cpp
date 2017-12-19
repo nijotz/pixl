@@ -24,11 +24,11 @@ MSGEQ7Input::MSGEQ7Input(int left_pin, int right_pin,
   digitalWrite(strobe_pin_, HIGH);
 }
 
-float scaleValue(float value, float min, float max) {
+float scaleValue(float value, float value_min, float value_max) {
   // Subtract min so lowest value is 0
-  value -= min;
-  max = (max - min);
-  value = (value / max);
+  value -= value_min;
+  value_max = (value_max - value_min);
+  value = (value / value_max);
 
   value = min(1.0, value);
   value = max(0.0, value);
