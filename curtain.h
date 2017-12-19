@@ -15,6 +15,7 @@ class CurtainAnimation : public Animation {
               double rotation_rad, double x_r, double y_r, double z_r);
     void update();
     void draw(float interpolation);
+    void setVisualization(Visualization* viz);
 
   private:
     LEDs& leds_;

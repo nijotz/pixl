@@ -21,11 +21,15 @@ void CurtainAnimation::init(int height_px, int width_px,
                             double x_r, double y_r, double z_r)
 {
   Log.Info("Setting up Curtain animation\n");
+  int llen = leds_.length();
+  Log.Info("LED count %d\n", (int)llen);
+  assert( (height_px * width_px) <= llen );
 
-  assert( (height_px * width_px) <= leds_.length() );
-
-  mapping_ = new double[leds_.length()];
-  for (int i = 0; i < leds_.length(); i++) {
+  Log.Info("%d %d\n", height_px, width_px);
+  mapping_ = new double[llen];
+  Log.Info("Mapped");
+  for (int i = 0; i < llen; i++) {
+    Log.Info("LED # %d\n", (int)i);
     mapping_[i] = 0.0;
   }
 
@@ -34,7 +38,9 @@ void CurtainAnimation::init(int height_px, int width_px,
   int x = width_px - 1;
   int y = 0;
   int y_inc = 1;
-  for (int i = 0; i < leds_.length(); i++) {
+
+  for (int i = 0; i < llen; i++) {
+    Log.Info("LED # %d\n", (int)i);
     // Find distance from top left corner (0,0)
     double x_distance = width_r * ((double)(x + 1) / (double)width_px);
     double y_distance = height_r * ((double)(y + 1) / (double)height_px);
@@ -64,6 +70,10 @@ void CurtainAnimation::init(int height_px, int width_px,
       y_inc = 1;
     }
   }
+}
+
+void CurtainAnimation::setVisualization(Visualization* viz) {
+  viz_ = viz;
 }
 
 void CurtainAnimation::update() {}

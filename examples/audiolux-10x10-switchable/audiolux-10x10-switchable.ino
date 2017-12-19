@@ -53,7 +53,7 @@ AudioAnalyzeFFT1024 fft;
 AudioConnection patchCord1(audio, 0, fft, 0);
 
 void setup() {
-  Log.Init(LOGLEVEL, 9600);
+  Log.Init(LOGLEVEL, 115200);
   delay(1000);
   Log.Info("Starting setup()\n");
   Serial.flush();
@@ -65,6 +65,7 @@ void setup() {
   //audioShield.lineInLevel(15);
   audioShield.inputSelect(AUDIO_INPUT_MIC);
   audioShield.micGain(63);
+  //audioShield.lineInLevel(15);
   //note.begin(.99);
 
   fft.windowFunction(AudioWindowHanning1024);
@@ -77,50 +78,8 @@ void setup() {
   FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 150);
   FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150);
 
-  FastLED.setBrightness(255);
-
-  
-  looper = Looper::instance();
-  
-  looper->setUpdatesPerSecond(30);
-    
-  setupAnim(new TwinkleVisualization(input, 150));
-
-  Log.Info("Finished setup()\n");
-  delay(100);
-}
-
-int incomingByte = 0;   // for incoming serial data
-void loop() {
-  //Code for Hardware Potentiometer Added to Teensy Audio Adapter to control either micGain or lineInLevel input volume:
-  //audioShield.lineInLevel(map(analogRead(A1),0, 1023, 0, 15)); // remap analog pot A1 values 0-1023 to line in level 0-15.
-  //audioShield.micGain(map(analogRead(A1), 0, 1023, 0, 63)); // remap analog pot A1 values 0-1023 to mic gain 0-63dB.
-  //if (analogRead(A1) > 800) {
-  //  setupAnim(new RippleVisualization(input, 150));
-  //}
-
-  if (Serial.available() > 0) {
-            // read the incoming byte:
-            incomingByte = Serial.read();
-
-            // say what you got:
-            Serial.print("I received: ");
-            Serial.println(incomingByte, DEC);
-    if (incomingByte == 49) {
-        setupAnim(new RippleVisualization(input, 150));
-    } else if (incomingByte == 50) {
-      setupAnim(new FireVisualization(input, 150));
-    } else {
-      setupAnim(new TwinkleVisualization(input, 150));
-    }
-  }
-
-  AudioNoInterrupts();
-  Looper::instance()->loop();
-  AudioInterrupts();
-}
-
-void setupAnim(Visualization* viz) {
+  FastLED.setBrightness(200);
+  viz = new RippleVisualization(input, 35, 1, true);
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
   anim3 = new CurtainAnimation(viz, leds3);
@@ -181,6 +140,74 @@ void setupAnim(Visualization* viz) {
     -0.88,  // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
+     
+  looper = Looper::instance();
+  
+  looper->setUpdatesPerSecond(30);
+    
+  setupAnim(viz);
+
+  Log.Info("Finished setup()\n");
+  delay(100);
+}
+
+char buffer[16];
+int len = 0;
+int size = 25;
+int smooth = 1;
+bool rippleFreq = true;
+
+void loop() {
+  if (Serial.available() > 0) {
+    // read the incoming byte:
+    int incomingByte = Serial.read();
+    buffer[len++] = incomingByte;
+    if (len >= 16) {
+      len = 0; // handle overflows
+    }
+    if (incomingByte == '\n') {
+
+      if (buffer[0] == '1') {
+        setupAnim(new RippleVisualization(input, size, smooth, rippleFreq));
+      } else if (buffer[0] == '2') {
+        setupAnim(new FireVisualization(input, size));
+      } else if (buffer[0] == '3') {
+        setupAnim(new TwinkleVisualization(input, size));
+      } else if (buffer[0] == 's') {
+        int n = sscanf(buffer, "s%d", &size);
+        if (n != 1) {
+          size = 25;
+        }
+      } else if (buffer[0] == 'v') {
+        int vol = 0;
+        if (sscanf(buffer, "v%d", &vol) == 1) {
+          audioShield.micGain(vol);
+          audioShield.lineInLevel(vol);
+        }
+      } else if (buffer[0] == 'm') { // smooth
+        if (sscanf(buffer, "m%d", &smooth) != 1) {
+          smooth = 1;
+        }
+      } else if (buffer[0] == 'f') {
+        if (sscanf(buffer, "f%b", &rippleFreq) != 1) {
+          rippleFreq = true;
+        }
+      }
+      len = 0;
+    }
+  }
+
+  AudioNoInterrupts();
+  Looper::instance()->loop();
+  AudioInterrupts();
+}
+
+void setupAnim(Visualization* viz) {
+  anim1->setVisualization(viz);
+  anim2->setVisualization(viz);
+  anim3->setVisualization(viz);
+  anim4->setVisualization(viz);
+  
   looper->clearAll();
   looper->addInput(input);
   looper->addVisualization(viz);
