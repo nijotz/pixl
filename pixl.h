@@ -11,6 +11,7 @@
 #include "msgeq7.h"
 #include "onoff.h"
 #include "ripple.h"
+#include "spokes.h"
 #include "triangle.h"
 #include "twinkle.h"
 #include "util.h"
