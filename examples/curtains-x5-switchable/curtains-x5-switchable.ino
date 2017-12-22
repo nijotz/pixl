@@ -12,7 +12,7 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_ERRORS
 
 using namespace pixl;
 
@@ -51,7 +51,7 @@ AudioInputI2S audio;
 AudioControlSGTL5000 audioShield;
 AudioAnalyzeFFT1024 fft;
 AudioConnection patchCord1(audio, 0, fft, 0);
-SwitchableController* sc;
+
 void setup() {
   Log.Init(LOGLEVEL, 115200);
   delay(1000);
@@ -146,11 +146,10 @@ void setup() {
 
   Log.Info("Finished setup()\n");
   delay(100);
-  sc = new SwitchableController();
 }
 
 void loop() {
-  sc->runSerial(input, audioShield);
+  runSerial(input, audioShield);
 
   AudioNoInterrupts();
   Looper::instance()->loop();
