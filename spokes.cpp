@@ -53,7 +53,14 @@ void SpokesAnimation::setVisualization(Visualization* viz) {
 void SpokesAnimation::update() {}
 
 void SpokesAnimation::draw(float interpolation) {
-  for (int i = 0; i < leds_.length(); i++) {
-    leds_[i] = viz_->getColorByRatio(mapping_[i]);
+  int spokes = 12;
+  int perStrip = 60;
+  for (int iY = 0; iY < perStrip; iY++) {
+    leds_[iY] = viz_->getColorByRatio(mapping_[iY]);
+    for (int iX = 0; iX < spokes; iX++) {
+      //Log.Info("LED # %d %d\n", (int)iX, iY);
+      leds_[iX*perStrip+iY] = leds_[iY];
+      //Log.Info("%i calc %s\n", iX*perStrip+iY, (float)iY/(float)perStrip * scale);
+    }
   }
 }
