@@ -18,15 +18,16 @@ void SpokesAnimation::init() {}
 void SpokesAnimation::init(float scale)
 {
   Log.Info("Setting up Spokes animation\n");
-  int llen = leds_.length();
+  
   int spokes = 12;
   int angle = 360 / spokes;
   int perStrip = 60;
-  Log.Info("LED count %d\n", (int)llen);
+  int llen = leds_.length();
+  Log.Info("LED count %i\n", llen);
 
   mapping_ = new double[llen];
   for (int i = 0; i < llen; i++) {
-    Log.Info("LED # %d\n", (int)i);
+    //Log.Info("LED # %d\n", (int)i);
     mapping_[i] = 0.0;
   }
 
@@ -38,8 +39,9 @@ void SpokesAnimation::init(float scale)
   //  9 - 540-599   10 - 600 - 659      11 - 660 - 719
   for (int iX = 0; iX < spokes; iX++) {
     for (int iY = 0; iY < perStrip; iY++) {
-      Log.Info("LED # %d %d\n", (int)iX, iY);
-      mapping_[iX*perStrip+iY] = (((iY+1)/perStrip) * scale);
+      //Log.Info("LED # %d %d\n", (int)iX, iY);
+      mapping_[iX*perStrip+iY] = (float)iY/(float)perStrip * scale;
+      //Log.Info("%i calc %s\n", iX*perStrip+iY, (float)iY/(float)perStrip * scale);
     }
   }
 }
