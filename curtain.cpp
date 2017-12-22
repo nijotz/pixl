@@ -27,9 +27,9 @@ void CurtainAnimation::init(int height_px, int width_px,
 
   Log.Info("%d %d\n", height_px, width_px);
   mapping_ = new double[llen];
-  Log.Info("Mapped");
+  //Log.Info("Mapped");
   for (int i = 0; i < llen; i++) {
-    Log.Info("LED # %d\n", (int)i);
+    //Log.Info("LED # %d\n", (int)i);
     mapping_[i] = 0.0;
   }
 
@@ -40,7 +40,7 @@ void CurtainAnimation::init(int height_px, int width_px,
   int y_inc = 1;
 
   for (int i = 0; i < llen; i++) {
-    Log.Info("LED # %d\n", (int)i);
+    //Log.Info("LED # %d\n", (int)i);
     // Find distance from top left corner (0,0)
     double x_distance = width_r * ((double)(x + 1) / (double)width_px);
     double y_distance = height_r * ((double)(y + 1) / (double)height_px);
