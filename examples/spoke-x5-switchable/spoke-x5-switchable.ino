@@ -73,17 +73,17 @@ void setup() {
 
   FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 720);
   FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 720);
-  FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 720);
-  FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 720);
-  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 720);
+  //FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 720);
+  //FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 720);
+  //FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 720);
 
   FastLED.setBrightness(200);
   viz = new RippleVisualization(input, 35, 1, true);
   anim1 = new SpokesAnimation(viz, leds1);
   anim2 = new SpokesAnimation(viz, leds2);
-  anim3 = new SpokesAnimation(viz, leds3);
-  anim4 = new SpokesAnimation(viz, leds4);
-  anim5 = new SpokesAnimation(viz, leds5);
+  //anim3 = new SpokesAnimation(viz, leds3);
+  //anim4 = new SpokesAnimation(viz, leds4);
+  //anim5 = new SpokesAnimation(viz, leds5);
 
   // Far right curtain
   anim1->init(1.0);
@@ -92,13 +92,13 @@ void setup() {
   anim2->init(1.0);
   
   // Middle - spokes
-  anim3->init(1.0);  // scale
+  //anim3->init(1.0);  // scale
 
   // Inner left curtain
-  anim4->init(1.0);
+  //anim4->init(1.0);
   
   // Far left curtain
-  anim5->init(1.0);
+  //anim5->init(1.0);
   
   looper = Looper::instance();
   
@@ -121,17 +121,17 @@ void loop() {
 void setupAnim(Visualization* viz) {
   anim1->setVisualization(viz);
   anim2->setVisualization(viz);
-  anim3->setVisualization(viz);
-  anim4->setVisualization(viz);
-  anim5->setVisualization(viz);
+  //anim3->setVisualization(viz);
+  //anim4->setVisualization(viz);
+  //anim5->setVisualization(viz);
   
   looper->clearAll();
   looper->addInput(input);
   looper->addVisualization(viz);
   looper->addAnimation(anim1);
   looper->addAnimation(anim2);
-  looper->addAnimation(anim3);
-  looper->addAnimation(anim4);
-  looper->addAnimation(anim5);
+  //looper->addAnimation(anim3);
+  //looper->addAnimation(anim4);
+  //looper->addAnimation(anim5);
 
 }
