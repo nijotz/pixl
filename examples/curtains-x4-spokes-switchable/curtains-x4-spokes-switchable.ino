@@ -21,24 +21,23 @@ Input* input;
 // Curtains
 LEDStrip strip1 = LEDStrip(150);
 LEDStrip strip2 = LEDStrip(150);
-LEDStrip strip3 = LEDStrip(150);
+LEDStrip strip3 = LEDStrip(720);
 LEDStrip strip4 = LEDStrip(150);
 LEDStrip strip5 = LEDStrip(150);
 
 // Curtain LEDs
 LEDs leds1 = LEDs(&strip1, 0, 150);
 LEDs leds2 = LEDs(&strip2, 0, 150);
-LEDs leds3 = LEDs(&strip3, 0, 150);
+LEDs leds3 = LEDs(&strip3, 0, 720);
 LEDs leds4 = LEDs(&strip4, 0, 150);
 LEDs leds5 = LEDs(&strip5, 0, 150);
 
 Visualization* viz;
 CurtainAnimation* anim1;
 CurtainAnimation* anim2;
-CurtainAnimation* anim3;
+SpokesAnimation* anim3;
 CurtainAnimation* anim4;
 CurtainAnimation* anim5;
-CurtainAnimation* anim6;
 
 Looper* looper;
 
@@ -51,7 +50,7 @@ AudioInputI2S audio;
 AudioControlSGTL5000 audioShield;
 AudioAnalyzeFFT1024 fft;
 AudioConnection patchCord1(audio, 0, fft, 0);
-SwitchableController* sc;
+
 void setup() {
   Log.Init(LOGLEVEL, 115200);
   delay(1000);
@@ -62,8 +61,11 @@ void setup() {
   AudioMemory(12);
   audioShield.enable();
   //audioShield.inputSelect(AUDIO_INPUT_LINEIN);
+  //audioShield.lineInLevel(15);
   audioShield.inputSelect(AUDIO_INPUT_MIC);
-  audioShield.micGain(13);
+  audioShield.micGain(63);
+  //audioShield.lineInLevel(15);
+  //note.begin(.99);
 
   fft.windowFunction(AudioWindowHanning1024);
 
@@ -71,7 +73,7 @@ void setup() {
 
   FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 150);
   FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 150);
-  FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 150);
+  FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 720);
   FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 150);
   FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150);
 
@@ -79,7 +81,7 @@ void setup() {
   viz = new RippleVisualization(input, 35, 1, true);
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
-  anim3 = new CurtainAnimation(viz, leds3);
+  anim3 = new SpokesAnimation(viz, leds3);
   anim4 = new CurtainAnimation(viz, leds4);
   anim5 = new CurtainAnimation(viz, leds5);
 
@@ -105,16 +107,8 @@ void setup() {
     -0.5,   // y "
      0.0);  // z "
 
-  // Middle curtain
-  anim3->init(
-     25,    // height in pixels
-     6,     // width in pixels
-     1.0,   // height in ratio of visualiation
-     0.33,  // width in ratio of visualiation
-     0.0,   // rotation in radians
-    -0.17, // x distance from visualization start in ratio of visualization
-    -0.5,   // y "
-     0.0);  // z "
+  // Middle - spokes
+  anim3->init(1.0);  // scale
 
   // Inner left curtain
   anim4->init(
@@ -146,12 +140,11 @@ void setup() {
 
   Log.Info("Finished setup()\n");
   delay(100);
-  sc = new SwitchableController();
 }
 
 void loop() {
-  sc->runSerial(input, audioShield);
-
+  runSerial(input, audioShield);
+  
   AudioNoInterrupts();
   Looper::instance()->loop();
   AudioInterrupts();
@@ -172,4 +165,5 @@ void setupAnim(Visualization* viz) {
   looper->addAnimation(anim3);
   looper->addAnimation(anim4);
   looper->addAnimation(anim5);
+
 }
