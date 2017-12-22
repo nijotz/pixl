@@ -19,18 +19,18 @@ using namespace pixl;
 Input* input;
 
 // Curtains
-LEDStrip strip1 = LEDStrip(150);
-LEDStrip strip2 = LEDStrip(150);
+LEDStrip strip1 = LEDStrip(720);
+LEDStrip strip2 = LEDStrip(720);
 LEDStrip strip3 = LEDStrip(720);
-LEDStrip strip4 = LEDStrip(150);
-LEDStrip strip5 = LEDStrip(150);
+LEDStrip strip4 = LEDStrip(720);
+LEDStrip strip5 = LEDStrip(720);
 
 // Curtain LEDs
-LEDs leds1 = LEDs(&strip1, 0, 150);
-LEDs leds2 = LEDs(&strip2, 0, 150);
+LEDs leds1 = LEDs(&strip1, 0, 720);
+LEDs leds2 = LEDs(&strip2, 0, 720);
 LEDs leds3 = LEDs(&strip3, 0, 720);
-LEDs leds4 = LEDs(&strip4, 0, 150);
-LEDs leds5 = LEDs(&strip5, 0, 150);
+LEDs leds4 = LEDs(&strip4, 0, 720);
+LEDs leds5 = LEDs(&strip5, 0, 720);
 
 Visualization* viz;
 SpokesAnimation* anim1;
@@ -71,11 +71,11 @@ void setup() {
 
   input = new FFTInput(&fft);
 
-  FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 150);
-  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 150);
+  FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 720);
+  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 720);
   FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 720);
-  FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 150);
-  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150);
+  FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 720);
+  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 720);
 
   FastLED.setBrightness(200);
   viz = new RippleVisualization(input, 35, 1, true);
