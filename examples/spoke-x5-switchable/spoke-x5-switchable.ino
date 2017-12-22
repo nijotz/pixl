@@ -19,25 +19,16 @@ using namespace pixl;
 Input* input;
 
 // Curtains
-LEDStrip strip1 = LEDStrip(720);
+//LEDStrip strip1 = LEDStrip(720);
 LEDStrip strip2 = LEDStrip(720);
-LEDStrip strip3 = LEDStrip(720);
-LEDStrip strip4 = LEDStrip(720);
-LEDStrip strip5 = LEDStrip(720);
 
 // Curtain LEDs
-LEDs leds1 = LEDs(&strip1, 0, 720);
+//LEDs leds1 = LEDs(&strip1, 0, 720);
 LEDs leds2 = LEDs(&strip2, 0, 720);
-LEDs leds3 = LEDs(&strip3, 0, 720);
-LEDs leds4 = LEDs(&strip4, 0, 720);
-LEDs leds5 = LEDs(&strip5, 0, 720);
 
 Visualization* viz;
 SpokesAnimation* anim1;
 SpokesAnimation* anim2;
-SpokesAnimation* anim3;
-SpokesAnimation* anim4;
-SpokesAnimation* anim5;
 
 Looper* looper;
 
@@ -71,7 +62,7 @@ void setup() {
 
   input = new FFTInput(&fft);
 
-  FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 720);
+  //FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 720);
   FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 720);
   //FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 720);
   //FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 720);
@@ -79,14 +70,14 @@ void setup() {
 
   FastLED.setBrightness(200);
   viz = new RippleVisualization(input, 35, 1, true);
-  anim1 = new SpokesAnimation(viz, leds1);
+  //anim1 = new SpokesAnimation(viz, leds1);
   anim2 = new SpokesAnimation(viz, leds2);
   //anim3 = new SpokesAnimation(viz, leds3);
   //anim4 = new SpokesAnimation(viz, leds4);
   //anim5 = new SpokesAnimation(viz, leds5);
 
   // Far right curtain
-  anim1->init(1.0);
+  //anim1->init(1.0);
 
   // Inner right curtain
   anim2->init(1.0);
@@ -119,7 +110,7 @@ void loop() {
 }
 
 void setupAnim(Visualization* viz) {
-  anim1->setVisualization(viz);
+  //anim1->setVisualization(viz);
   anim2->setVisualization(viz);
   //anim3->setVisualization(viz);
   //anim4->setVisualization(viz);
@@ -128,7 +119,7 @@ void setupAnim(Visualization* viz) {
   looper->clearAll();
   looper->addInput(input);
   looper->addVisualization(viz);
-  looper->addAnimation(anim1);
+  //looper->addAnimation(anim1);
   looper->addAnimation(anim2);
   //looper->addAnimation(anim3);
   //looper->addAnimation(anim4);
