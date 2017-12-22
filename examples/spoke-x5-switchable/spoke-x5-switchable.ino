@@ -12,7 +12,7 @@ extern "C"{
   int _write(){return -1;}
 }
 
-#define LOGLEVEL LOG_LEVEL_INFOS
+#define LOGLEVEL LOG_LEVEL_ERRORS
 
 using namespace pixl;
 
@@ -63,7 +63,7 @@ void setup() {
   input = new FFTInput(&fft);
 
   //FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 720);
-  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 720);
+  FastLED.addLeds<WS2811,  2, GRB>(strip2.leds, 720);
   //FastLED.addLeds<WS2811, 21, RGB>(strip3.leds, 720);
   //FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 720);
   //FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 720);
