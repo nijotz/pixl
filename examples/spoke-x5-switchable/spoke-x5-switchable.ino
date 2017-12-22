@@ -80,7 +80,7 @@ void setup() {
   //anim1->init(1.0);
 
   // Inner right curtain
-  anim2->init(1.0);
+  anim2->init(0.3);
   
   // Middle - spokes
   //anim3->init(1.0);  // scale
