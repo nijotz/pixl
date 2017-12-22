@@ -17,7 +17,7 @@
 #include "util.h"
 #include "visualization.h"
 
-#if defined(__MK20DX256__) || defined(__MK20DX128__)
+#if defined(__MK20DX256__) || defined(__MK20DX128__) || defined(__MK66FX1M0__)
 #include "audioshield.h"
 #include "fft.h"
 #endif
