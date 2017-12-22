@@ -108,7 +108,7 @@ void setup() {
      0.0);  // z "
 
   // Middle - spokes
-  anim3->init(1.0);  // scale
+  anim3->init(0.5);  // scale
 
   // Inner left curtain
   anim4->init(
