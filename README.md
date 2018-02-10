@@ -9,7 +9,7 @@ point for starting a new project.
 
 # Dependencies
 You will also need to also install FastLED, a Logging Library and Teensyduino (if you are using a Teensy): 
-* Logging Library: https://github.com/CymaSpace/Arduino-logging-library
+* Logging Library: https://github.com/CymaSpace/Arduino-logging-library (if throws compiling error, see Troubleshooting below)
 * Teensyduino: https://www.pjrc.com/teensy/td_download.html
 * FastLED: http://fastled.io/ (Install this if you are not running Teensyduino).
 
@@ -203,3 +203,6 @@ void loop() {
   Looper::instance()->loop();
 }
 ```
+
+# Troubleshooting
+If Logging Library throws an error during compiling; make sure the following fix (remove line 11 in red and add line 12 highlighted in in green) is implemented in the Logging.cpp file: https://github.com/CymaSpace/Arduino-logging-library/commit/3fccfead3330ecf184322f0114fcaaf57fc86eab
