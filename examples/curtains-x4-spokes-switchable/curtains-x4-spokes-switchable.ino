@@ -71,17 +71,17 @@ void setup() {
 
   input = new FFTInput(&fft);
 
-  FastLED.addLeds<WS2811, 14, RGB>(strip1.leds, 150);
-  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 150);
-  FastLED.addLeds<WS2811, 21, GRB>(strip3.leds, 720);
-  FastLED.addLeds<WS2811, 20, RGB>(strip4.leds, 150);
-  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150);
+  FastLED.addLeds<WS2811, 20, RGB>(strip1.leds, 150); // Far Right Curtain 
+  FastLED.addLeds<WS2811,  2, RGB>(strip2.leds, 150); // Inner Right Curtain or Left Rack
+  FastLED.addLeds<WS2811,  7, GRB>(strip3.leds, 720); // Spokes
+  FastLED.addLeds<WS2811, 14, RGB>(strip4.leds, 150); // Inner Left Curtain or Right Rack
+  FastLED.addLeds<WS2811,  6, RGB>(strip5.leds, 150); // Far Left Curtain
 
   FastLED.setBrightness(200);
   viz = new RippleVisualization(input, 35, 1, true);
   anim1 = new CurtainAnimation(viz, leds1);
   anim2 = new CurtainAnimation(viz, leds2);
-  anim3 = new SpokesAnimation(viz, leds3);
+  anim3 = new SpokesAnimation(viz, leds3); // Spokes
   anim4 = new CurtainAnimation(viz, leds4);
   anim5 = new CurtainAnimation(viz, leds5);
 
@@ -96,7 +96,7 @@ void setup() {
     -0.5,   // y "
      0.0);  // z "
 
-  // Inner right curtain
+  // Inner right curtain or Left Rack
   anim2->init(
      25,    // height in pixels
      6,     // width in pixels
@@ -110,7 +110,7 @@ void setup() {
   // Middle - spokes
   anim3->init(0.5);  // scale
 
-  // Inner left curtain
+  // Inner left curtain or Right Rack
   anim4->init(
      25,    // height in pixels
      6,     // width in pixels
