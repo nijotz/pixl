@@ -7,6 +7,12 @@ Download one of the release zips and add it to your project using the Arduino
 IDE.  The cymatic-triangles example in the `examples/` folder is a good starting
 point for starting a new project.
 
+# Dependencies
+You will also need to also install FastLED, a Logging Library and Teensyduino (if you are using a Teensy): 
+Logging Library: https://github.com/CymaSpace/Arduino-logging-library
+Teensyduino: https://www.pjrc.com/teensy/td_download.html
+FastLED: http://fastled.io/ (Install this if you are not running Teensyduino).
+
 # Concepts
 Below are the concepts used in the Library with examples of how to use them.
 
