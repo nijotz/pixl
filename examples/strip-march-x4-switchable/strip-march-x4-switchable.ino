@@ -19,20 +19,20 @@ using namespace pixl;
 Input* input;
 
 // Curtains
-LEDStrip strip1 = LEDStrip(400);
+LEDStrip strip1 = LEDStrip(200);
 LEDStrip strip2 = LEDStrip(400);
 LEDStrip strip3 = LEDStrip(400);
 LEDStrip strip4 = LEDStrip(400);
 
 // Curtain LEDs
-LEDs leds1 = LEDs(&strip1, 0, 400);
+LEDs leds1 = LEDs(&strip1, 0, 200);
 LEDs leds2 = LEDs(&strip2, 0, 400);
 LEDs leds3 = LEDs(&strip3, 0, 400);
 LEDs leds4 = LEDs(&strip4, 0, 400);
 
 
 Visualization* viz;
-SpokesAnimation* anim1;
+CurtainAnimation* anim1;
 SpokesAnimation* anim2;
 SpokesAnimation* anim3;
 SpokesAnimation* anim4;
@@ -69,21 +69,29 @@ void setup() {
 
   input = new FFTInput(&fft);
 
-  FastLED.addLeds<WS2811,  2, RGB>(strip1.leds, 400); // Spokes 1 
+  FastLED.addLeds<WS2811,  6, RGB>(strip1.leds, 200); // Spokes 1 
   FastLED.addLeds<WS2811,  14, GRB>(strip2.leds, 400); // Spokes 2
   FastLED.addLeds<WS2811,  21, GRB>(strip3.leds, 400); // Spokes 3
-  FastLED.addLeds<WS2811,  6, GRB>(strip4.leds, 400); // Spokes 4
+  FastLED.addLeds<WS2811,  2, GRB>(strip4.leds, 400); // Spokes 4
 
 
   FastLED.setBrightness(200);
   viz = new RippleVisualization(input, 35, 1, true);
-  anim1 = new SpokesAnimation(viz, leds1); // Spokes
+  anim1 = new CurtainAnimation(viz, leds1); // Spokes
   anim2 = new SpokesAnimation(viz, leds2); // Spokes
   anim3 = new SpokesAnimation(viz, leds3); // Spokes
   anim4 = new SpokesAnimation(viz, leds4); // Spokes
 
-  // Spokes 1
-  anim1->init(0.5);  // scale
+  // Inner right  curtain
+  anim1->init(
+     25,    // height in pixels
+     6,     // width in pixels
+     1.0,   // height in ratio of visualiation
+     0.17,  // width in ratio of visualiation
+     0.0,   // rotation in radians
+     0.25,   // x distance from visualization start in ratio of visualization
+    -0.5,   // y "
+     0.0);  // z "
 
   // Spokes 2
   anim2->init(0.5);  // scale
@@ -92,7 +100,7 @@ void setup() {
   anim3->init(0.5);  // scale
 
   // Spokes 4
-  anim3->init(0.5);  // scale
+  anim4->init(0.5);  // scale
   
      
   looper = Looper::instance();
