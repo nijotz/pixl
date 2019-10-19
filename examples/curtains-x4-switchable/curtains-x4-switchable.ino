@@ -112,7 +112,7 @@ void setup() {
      1.0,   // height in ratio of visualiation
      0.33,  // width in ratio of visualiation
      0.0,   // rotation in radians
-    -0.17, // x distance from visualization start in ratio of visualization
+    -0.19, // x distance from visualization start in ratio of visualization
     -0.5,   // y "
      0.0);  // z "
 
